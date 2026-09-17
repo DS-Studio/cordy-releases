@@ -22,13 +22,19 @@ _No public build yet._
 
 > Windows x64 and macOS Apple Silicon only. Windows installers are not code-signed and macOS builds are not notarized, so your operating system will warn you on first run.
 
-### Cordy for Chrome
+### Cordy for Chrome 2.5.4
 
 **[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih)**
 
 Install from the Chrome Web Store — it is the only supported way to install this extension, and it keeps itself updated.
 
-_No public build yet._
+Released 2026-09-17 · [Release notes](https://github.com/DS-Studio/cordy-releases/releases/tag/chrome-v2.5.4)
+
+The files below are verification artifacts for the published package:
+
+| Platform | Architecture | File | Size | SHA-256 |
+| --- | --- | --- | --- | --- |
+| Chrome | — | [cordy-2.5.4-chrome.zip](https://github.com/DS-Studio/cordy-releases/releases/download/chrome-v2.5.4/cordy-2.5.4-chrome.zip) | 13.4 MB | `1a0fbe7c73d1` |
 
 > Any .zip attached to a release is a verification artifact for auditing the reviewed package, not an alternate install path.
 

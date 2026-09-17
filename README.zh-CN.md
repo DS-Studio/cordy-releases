@@ -21,13 +21,19 @@ _暂无公开构建。_
 
 > 仅支持 Windows x64 与 macOS Apple Silicon。Windows 安装包未做代码签名，macOS 构建未经公证，首次运行时系统会弹出安全警告。
 
-### Cordy 浏览器扩展
+### Cordy 浏览器扩展 2.5.4
 
 **[从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih)**
 
 请从 Chrome 应用商店安装——这是本扩展唯一受支持的安装方式，且会自动保持更新。
 
-_暂无公开构建。_
+发布于 2026-09-17 · [发布说明](https://github.com/DS-Studio/cordy-releases/releases/tag/chrome-v2.5.4)
+
+以下文件是已发布包的校验产物：
+
+| 平台 | 架构 | 文件 | 大小 | SHA-256 |
+| --- | --- | --- | --- | --- |
+| Chrome | — | [cordy-2.5.4-chrome.zip](https://github.com/DS-Studio/cordy-releases/releases/download/chrome-v2.5.4/cordy-2.5.4-chrome.zip) | 13.4 MB | `1a0fbe7c73d1` |
 
 > Release 中附带的 .zip 是用于核对已审核包内容的校验产物，不是另一条安装路径。
 

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-18T00:00:00Z",
+  "generated": "2026-09-17T19:21:46.215Z",
   "site": "https://cordy.dsdev.cn",
   "repo": "DS-Studio/cordy-releases",
   "products": [
@@ -20,10 +20,10 @@
       "id": "chrome",
       "name": "Cordy for Chrome",
       "nameZh": "Cordy 浏览器扩展",
-      "status": "unreleased",
-      "version": null,
-      "tag": null,
-      "releasedAt": null,
+      "status": "released",
+      "version": "2.5.4",
+      "tag": "chrome-v2.5.4",
+      "releasedAt": "2026-09-17T19:21:46.215Z",
       "channel": {
         "kind": "chrome-web-store",
         "url": "https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih",
@@ -32,7 +32,15 @@
       },
       "notes": "Any .zip attached to a release is a verification artifact for auditing the reviewed package, not an alternate install path.",
       "notesZh": "Release 中附带的 .zip 是用于核对已审核包内容的校验产物，不是另一条安装路径。",
-      "assets": []
+      "assets": [
+        {
+          "file": "cordy-2.5.4-chrome.zip",
+          "os": "Chrome",
+          "arch": "—",
+          "size": 14024378,
+          "sha256": "1a0fbe7c73d150a0b982859610dd5fe02fd9cdaaa866a25656588d69446fd504"
+        }
+      ]
     },
     {
       "id": "app",

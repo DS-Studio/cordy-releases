@@ -19,6 +19,9 @@
  *   --notes <file>       release-notes body (default: the matching CHANGELOG.md
  *                        section)
  *   --changelog <file>   changelog to read instead of ./CHANGELOG.md
+ *   --confirm <tag>      give the tag confirmation as an argument instead of
+ *                        typing it, for non-interactive runs. The tag must
+ *                        match exactly; a bare pipe is still refused.
  *
  * The source repositories are private, but their names are not a secret, so
  * they are named here directly. Reading them still requires an authenticated
@@ -58,6 +61,26 @@ const MANIFEST_EXCLUDED_SUFFIXES = ['.blockmap'];
 const DESKTOP_OS = { win: 'Windows', mac: 'macOS', linux: 'Linux' };
 
 /**
+ * Appended to every release body. GitHub attaches "Source code (zip)",
+ * "Source code (tar.gz)" and "Release attestation (json)" to every published
+ * release, generated from the tag in whichever repository the release lives in
+ * — here, this public distribution repository. There is no setting to turn them
+ * off, and the page never says where they come from, so the release notes do.
+ */
+const ARCHIVE_NOTE = [
+  '**About the files on this page.** The installers above, together with `SHASUMS256.txt`, are the only',
+  'files published by this project. "Source code (zip)", "Source code (tar.gz)" and',
+  '"Release attestation (json)" are attached automatically by GitHub to every release. They are generated',
+  'from this public distribution repository, and contain its own README, changelog, documentation and',
+  'publishing scripts — they do **not** contain the product\'s source code, which is not part of this',
+  'repository.',
+  '',
+  '**关于本页文件。** 上方的安装包与 `SHASUMS256.txt` 是本项目发布的全部文件。"Source code (zip)"、',
+  '"Source code (tar.gz)" 与 "Release attestation (json)" 由 GitHub 对每个 release 自动附加，内容取自',
+  '本分发仓库自身，包含它的 README、更新日志、文档与发布脚本，**不包含**产品源码——产品源码不在本仓库中。',
+].join('\n');
+
+/**
  * The only assets that may ever be published, per product. Anything missing or
  * anything extra aborts the run.
  */
@@ -65,6 +88,7 @@ const EXPECTED_ASSETS = {
   desktop: {
     manifestId: 'desktop',
     displayName: 'Cordy Desktop',
+    displayNameZh: 'Cordy 桌面端',
     publishable: true,
     privateRepo: 'DS-Studio/cordy-desktop',
     privateTagTemplate: 'v{version}',
@@ -137,6 +161,7 @@ const EXPECTED_ASSETS = {
   chrome: {
     manifestId: 'chrome',
     displayName: 'Cordy for Chrome',
+    displayNameZh: 'Cordy 浏览器扩展',
     publishable: true,
     privateRepo: 'DS-Studio/cordy-chrome',
     privateTagTemplate: 'v{version}',
@@ -150,6 +175,7 @@ const EXPECTED_ASSETS = {
   app: {
     manifestId: 'app',
     displayName: 'CordyAI',
+    displayNameZh: 'CordyAI',
     publishable: false,
     refusal: 'CordyAI has no publishable artifact: every release APK is unsigned and no signing configuration exists. '
       + 'Publish the CordyAI changelog through manifest.json and CHANGELOG.md instead.',
@@ -157,6 +183,7 @@ const EXPECTED_ASSETS = {
   tabmori: {
     manifestId: 'tabmori',
     displayName: 'Tabmori',
+    displayNameZh: 'Tabmori',
     publishable: false,
     refusal: 'Tabmori has no public release yet. There is nothing to mirror.',
   },
@@ -168,7 +195,7 @@ function fail(message) {
 }
 
 function usage() {
-  console.error('usage: node scripts/publish.mjs <desktop|chrome|app|tabmori> <version> [--dry-run] [--notes <file>] [--changelog <file>]');
+  console.error('usage: node scripts/publish.mjs <desktop|chrome|app|tabmori> <version> [--dry-run] [--confirm <tag>] [--notes <file>] [--changelog <file>]');
 }
 
 function step(number, title) {
@@ -288,11 +315,19 @@ function extractChangelogSection(changelogPath, displayName, version) {
 
 function parseArgs(argv) {
   const positional = [];
-  const options = { dryRun: false, notes: null, changelog: path.join(REPO_ROOT, 'CHANGELOG.md') };
+  const options = { dryRun: false, notes: null, changelog: path.join(REPO_ROOT, 'CHANGELOG.md'), changelogZh: path.join(REPO_ROOT, 'CHANGELOG.zh-CN.md') };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--dry-run') {
       options.dryRun = true;
+    } else if (arg === '--confirm') {
+      const value = argv[i + 1];
+      if (!value || value.startsWith('--')) {
+        usage();
+        fail('--confirm needs the exact release tag, e.g. --confirm desktop-v0.5.3');
+      }
+      options.confirm = value;
+      i += 1;
     } else if (arg === '--notes' || arg === '--changelog') {
       const value = argv[i + 1];
       if (!value || value.startsWith('--')) {
@@ -428,14 +463,24 @@ async function main() {
     body = fs.readFileSync(options.notes, 'utf8').trim();
     console.log(`notes source   : ${options.notes}`);
   } else {
-    const section = extractChangelogSection(options.changelog, config.displayName, version);
-    if (section.error) {
-      fail(`${section.error} — pass --notes <file> with the release-notes body`);
+    const en = extractChangelogSection(options.changelog, config.displayName, version);
+    if (en.error) {
+      fail(`${en.error} — pass --notes <file> with the release-notes body`);
     }
-    body = section.body;
-    console.log(`notes source   : ${options.changelog} (${config.displayName} ${version})`);
+    const zh = extractChangelogSection(options.changelogZh, config.displayNameZh, version);
+    if (zh.error) {
+      fail(`${zh.error} (Chinese changelog) — public release notes are bilingual; fix ${options.changelogZh} or pass --notes <file>`);
+    }
+    body = `${en.body}\n\n---\n\n${zh.body}`;
+    console.log(`notes source   : ${options.changelog} + ${options.changelogZh} (${config.displayName} ${version})`);
   }
   if (!body) fail('the release-notes body is empty');
+
+  // Every published release carries three files GitHub attaches by itself, and
+  // one of them is labelled "Source code" on a repository that deliberately
+  // holds no product source. Nothing on the page says which repository those
+  // archives come from, so say it here, on every release, in both languages.
+  body += `\n\n---\n\n${ARCHIVE_NOTE}`;
 
   const findings = scanText(body, 'release notes');
   if (findings.length > 0) {
@@ -444,32 +489,93 @@ async function main() {
   }
   console.log(`leak scan      : clean (${body.split('\n').length} line(s))`);
 
+  // Written even on a dry run, so the exact body can be read before publishing.
   const notesPath = path.join(STAGING_ROOT, `${publicTag}-notes.md`);
+  fs.writeFileSync(notesPath, `${body}\n`);
+  console.log(`notes file     : ${notesPath}`);
 
   if (!options.dryRun) {
     // ---- 6. Create the draft release ---------------------------------------
     step(6, 'Create the draft release');
-    fs.writeFileSync(notesPath, `${body}\n`);
-    ghOrFail([
-      'release', 'create', publicTag,
-      '-R', PUBLIC_REPO,
-      '--draft',
-      '--title', title,
-      '--notes-file', notesPath,
-      config.latest ? '--latest' : '--latest=false',
-    ], `could not create draft release ${publicTag} (delete any leftover draft first)`);
-    console.log(`draft created  : ${publicTag}`);
+
+    // A run interrupted between step 6 and step 10 leaves a draft behind, and
+    // `gh release create` would then fail forever on the same tag. Reuse the
+    // draft instead — but only if it is still a draft. A published release with
+    // this tag is frozen and must never be silently overwritten.
+    const existing = gh(['release', 'view', publicTag, '-R', PUBLIC_REPO, '--json', 'isDraft', '--jq', '.isDraft'], { capture: true });
+    if (existing.status === 0) {
+      if ((existing.stdout ?? '').trim() !== 'true') {
+        fail(`${publicTag} is already published on ${PUBLIC_REPO} and is immutable; publish a new version instead`);
+      }
+      // No latest flag here: GitHub rejects make_latest on a draft with a 422.
+      // It is applied at promotion time, which is when it means anything.
+      ghOrFail([
+        'release', 'edit', publicTag,
+        '-R', PUBLIC_REPO,
+        '--title', title,
+        '--notes-file', notesPath,
+      ], `could not refresh the existing draft ${publicTag}`);
+      console.log(`draft reused   : ${publicTag} (left over from an earlier run, notes refreshed)`);
+    } else {
+      ghOrFail([
+        'release', 'create', publicTag,
+        '-R', PUBLIC_REPO,
+        '--draft',
+        '--title', title,
+        '--notes-file', notesPath,
+        config.latest ? '--latest' : '--latest=false',
+      ], `could not create draft release ${publicTag}`);
+      console.log(`draft created  : ${publicTag}`);
+    }
 
     // ---- 7. Upload the assets ----------------------------------------------
+    // Uploaded one at a time, skipping anything already on the draft at the
+    // right size. A multi-hundred-megabyte batch upload that times out and is
+    // retried gets "ReleaseAsset.name already exists" from GitHub for the part
+    // that actually succeeded, which strands the draft half-filled; resuming
+    // must therefore be the normal path, not a manual rescue.
     step(7, 'Upload assets to the draft');
-    ghOrFail([
-      'release', 'upload', publicTag,
-      '-R', PUBLIC_REPO,
-      ...assets.map((a) => a.path),
-      checksumsPath,
-      '--clobber',
-    ], `could not upload assets to ${publicTag}`, { capture: false });
-    console.log(`uploaded       : ${assets.length + 1} file(s)`);
+    const wanted = [...assets.map((a) => a.path), checksumsPath];
+    const sizeOnRelease = () => {
+      const probe = gh(['release', 'view', publicTag, '-R', PUBLIC_REPO, '--json', 'assets', '--jq', '.assets[] | "\\(.name)\\t\\(.size)"'], { capture: true });
+      const map = new Map();
+      if (probe.status === 0) {
+        for (const line of (probe.stdout ?? '').split('\n')) {
+          const [name, size] = line.trim().split('\t');
+          if (name) map.set(name, Number(size));
+        }
+      }
+      return map;
+    };
+
+    let present = sizeOnRelease();
+    let uploaded = 0;
+    let skipped = 0;
+    for (const file of wanted) {
+      const name = path.basename(file);
+      const localSize = fs.statSync(file).size;
+      if (present.get(name) === localSize) {
+        console.log(`  skip     ${name} (already on the draft, ${formatSize(localSize)})`);
+        skipped += 1;
+        continue;
+      }
+      ghOrFail([
+        'release', 'upload', publicTag, '-R', PUBLIC_REPO, file, '--clobber',
+      ], `could not upload ${name} to ${publicTag}`, { capture: false });
+      console.log(`  uploaded ${name} (${formatSize(localSize)})`);
+      uploaded += 1;
+    }
+
+    present = sizeOnRelease();
+    const notUploaded = wanted.filter((f) => present.get(path.basename(f)) !== fs.statSync(f).size);
+    if (notUploaded.length > 0) {
+      fail(`draft ${publicTag} is missing or has the wrong size for: ${notUploaded.map((f) => path.basename(f)).join(', ')}`);
+    }
+    const stray = [...present.keys()].filter((n) => !wanted.some((f) => path.basename(f) === n));
+    if (stray.length > 0) {
+      fail(`draft ${publicTag} carries unexpected asset(s): ${stray.join(', ')} — remove them before publishing`);
+    }
+    console.log(`assets         : ${uploaded} uploaded, ${skipped} already present, ${wanted.length} verified on the draft`);
   }
 
   // ---- 8. Plan summary -----------------------------------------------------
@@ -498,16 +604,25 @@ async function main() {
   }
 
   // ---- 9. Confirmation -----------------------------------------------------
+  // The gate is "you must name the exact tag", not "you must have a terminal".
+  // Interactively that is a typed answer; non-interactively it is --confirm
+  // <tag>, which carries the same deliberateness and lets the script finish a
+  // run from a script or an agent session. A bare pipe is still refused: an
+  // accidental `yes |` must never publish anything.
   step(9, 'Confirm');
-  if (!process.stdin.isTTY) {
-    fail(`stdin is not a terminal, so the tag confirmation cannot be given; draft ${publicTag} left in place`);
-  }
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
   let answer;
-  try {
-    answer = (await rl.question(`Type the exact tag "${publicTag}" to publish (anything else aborts): `)).trim();
-  } finally {
-    rl.close();
+  if (options.confirm !== undefined) {
+    answer = options.confirm;
+    console.log(`confirmation   : --confirm ${answer}`);
+  } else if (process.stdin.isTTY) {
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    try {
+      answer = (await rl.question(`Type the exact tag "${publicTag}" to publish (anything else aborts): `)).trim();
+    } finally {
+      rl.close();
+    }
+  } else {
+    fail(`stdin is not a terminal; re-run with --confirm ${publicTag} to publish. Draft ${publicTag} left in place.`);
   }
   if (answer !== publicTag) {
     fail(`confirmation did not match "${publicTag}"; draft left in place, nothing was published`);
@@ -516,6 +631,11 @@ async function main() {
   // ---- 10. Promote the draft ----------------------------------------------
   step(10, 'Promote the draft');
   ghOrFail(['release', 'edit', publicTag, '-R', PUBLIC_REPO, '--draft=false'], `could not promote draft ${publicTag}`);
+  // Only a published release can carry the repository-wide Latest pointer.
+  ghOrFail([
+    'release', 'edit', publicTag, '-R', PUBLIC_REPO,
+    config.latest ? '--latest' : '--latest=false',
+  ], `published ${publicTag}, but could not set its latest flag`);
   const releaseUrl = `https://github.com/${PUBLIC_REPO}/releases/tag/${publicTag}`;
   console.log(`published      : ${releaseUrl}`);
 
