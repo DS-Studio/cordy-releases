@@ -235,7 +235,12 @@ export function renderReadmes({ check = false, manifestPath = MANIFEST_PATH } = 
 
   for (const target of TARGETS) {
     const file = path.join(REPO_ROOT, target.file);
-    const committed = fs.readFileSync(file, 'utf8');
+    // Normalise to LF before comparing. The block we splice in is always LF,
+    // so against a CRLF working copy (git autocrlf, or a Windows editor) a raw
+    // comparison reports every single line as changed — a --check failure whose
+    // diff shows two identical-looking lines. .gitattributes pins eol=lf; this
+    // keeps the check honest even if a file arrives with CRLF anyway.
+    const committed = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
     const block = renderBlock(manifest, target.lang);
     const rendered = spliceBlock(committed, block, target.file);
     const stale = rendered !== committed;

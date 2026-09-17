@@ -1,0 +1,4 @@
+# This repository is text only, and scripts/render.mjs compares file content
+# byte for byte. Pin LF everywhere so a Windows checkout does not turn every
+# line into a phantom diff.
+* text=auto eol=lf
