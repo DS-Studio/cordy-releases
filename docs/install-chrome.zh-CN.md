@@ -6,10 +6,9 @@ English version: [install-chrome.md](install-chrome.md)
 
 这是安装 Cordy 浏览器扩展的受支持方式：
 
-**<!-- TODO: Chrome Web Store listing URL -->**
+**https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih**
 
-**2.5.4 版本目前正在等待 Chrome 应用商店审核。** 在审核通过之前，商店页面可能
-仍显示旧版本，或暂时没有页面。通过应用商店安装可以获得自动更新，也不会有 Chrome
+商店上架的就是当前版本。通过应用商店安装可以获得自动更新，也不会有 Chrome
 的安全警告——除非有特别原因，否则请使用这种方式。
 
 ## Release 里的 .zip 是做什么用的
@@ -24,7 +23,7 @@ macOS 上的 Chrome 44 开始，除非你自己开启开发者模式，否则 Ch
 
 ## 开发者模式：适合确实需要的人
 
-如果你需要在商店审核通过之前使用这个具体版本——用于评审、测试或审计——可以
+如果你需要使用这个具体的包而不是商店版本——用于评审、测试或审计——可以
 以"加载已解压的扩展程序"的方式安装：
 
 1. 下载该 Release 的 `.zip`。

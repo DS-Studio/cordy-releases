@@ -23,7 +23,9 @@ _暂无公开构建。_
 
 ### Cordy 浏览器扩展
 
-Chrome 应用商店是本扩展唯一受支持的安装方式。2.5.4 版本正在等待商店审核。
+**[从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih)**
+
+请从 Chrome 应用商店安装——这是本扩展唯一受支持的安装方式，且会自动保持更新。
 
 _暂无公开构建。_
 

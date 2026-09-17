@@ -20,10 +20,9 @@
  *                        section)
  *   --changelog <file>   changelog to read instead of ./CHANGELOG.md
  *
- * The source repositories are private and their slugs are deliberately not
- * committed to this public repository. Export them before running:
- *   CORDY_SOURCE_DESKTOP=<owner>/<repo>
- *   CORDY_SOURCE_CHROME=<owner>/<repo>
+ * The source repositories are private, but their names are not a secret, so
+ * they are named here directly. Reading them still requires an authenticated
+ * `gh` CLI with access; a stranger gains nothing from the slug.
  *
  * Requires an authenticated `gh` CLI. Node standard library only.
  */
@@ -43,8 +42,15 @@ const MANIFEST_PATH = path.join(REPO_ROOT, 'manifest.json');
 const STAGING_ROOT = path.join(REPO_ROOT, 'tmp');
 const CHECKSUMS_FILE = 'SHASUMS256.txt';
 
-/** Checksum file names a private release may legitimately carry. */
-const CHECKSUM_CANDIDATES = [CHECKSUMS_FILE, 'SHA256SUMS.txt', 'checksums.txt'];
+/**
+ * A checksum file the source release may carry, under any of the names the
+ * product repositories have used: SHASUMS256.txt, SHA256SUMS-platforms.txt,
+ * checksums-2.5.4.txt. These are cross-checked against, never republished —
+ * this script writes its own SHASUMS256.txt over the assets it actually ships.
+ */
+function isChecksumFile(name) {
+  return /^(?:shasums256|sha256sums[\w.-]*|checksums?[\w.-]*)\.txt$/i.test(name);
+}
 
 /** Assets uploaded for completeness but not listed as a user download. */
 const MANIFEST_EXCLUDED_SUFFIXES = ['.blockmap'];
@@ -60,44 +66,83 @@ const EXPECTED_ASSETS = {
     manifestId: 'desktop',
     displayName: 'Cordy Desktop',
     publishable: true,
-    privateRepo: () => sourceRepo('CORDY_SOURCE_DESKTOP'),
+    privateRepo: 'DS-Studio/cordy-desktop',
     privateTagTemplate: 'v{version}',
     publicTagPrefix: 'desktop',
     // GitHub's "Latest" badge is repository-wide, so it tracks Cordy Desktop.
     latest: true,
+    // Present in the source release, deliberately not republished. Update-feed
+    // metadata would be misleading (no product ships an updater), and the build
+    // provenance report is an internal QA artifact. Checksum files are tolerated
+    // automatically by isChecksumFile().
+    ignorePattern: (version) => [
+      'latest.yml',
+      'latest-mac.yml',
+      'latest-linux.yml',
+      `cordy-${version}-platform-builds.json`,
+    ],
     // The x64 token differs per extension because electron-builder's ${arch}
     // macro resolves through getArtifactArchName(arch, ext): AppImage/rpm get
     // "x86_64", deb/snap get "amd64", everything else keeps "x64". arm64 is
     // never rewritten. These are the names the build actually emits — do not
     // "tidy" them into a uniform x64, or the allowlist check below will abort.
-    assetPattern: (version) => [
-      `cordy-desktop-${version}-win-x64.exe`,
-      `cordy-desktop-${version}-win-x64.exe.blockmap`,
-      `cordy-desktop-${version}-mac-arm64.dmg`,
-      `cordy-desktop-${version}-mac-arm64.zip`,
-      `cordy-desktop-${version}-linux-x86_64.AppImage`,
-      `cordy-desktop-${version}-linux-arm64.AppImage`,
-      `cordy-desktop-${version}-linux-amd64.deb`,
-      `cordy-desktop-${version}-linux-arm64.deb`,
-    ],
+    assetPattern: (version) => {
+      // 0.5.3 was packaged before the artifactName fix, as cordy-Setup-*, with
+      // the Linux arch suffixes added by hand after the build. Publish those
+      // bytes under the names they were actually built and checksummed with.
+      // Renaming at publish time is the exact step that made 0.5.3
+      // unrepeatable, so this script does not do it — not even to tidy up.
+      if (version === '0.5.3') {
+        return [
+          `cordy-Setup-${version}.dmg`,
+          `cordy-Setup-${version}.dmg.blockmap`,
+          `cordy-Setup-${version}.zip`,
+          `cordy-Setup-${version}.zip.blockmap`,
+          `cordy-Setup-${version}-linux-x64.AppImage`,
+          `cordy-Setup-${version}-linux-arm64.AppImage`,
+          `cordy-Setup-${version}-linux-x64.deb`,
+          `cordy-Setup-${version}-linux-arm64.deb`,
+        ];
+      }
+      return [
+        `cordy-desktop-${version}-win-x64.exe`,
+        `cordy-desktop-${version}-win-x64.exe.blockmap`,
+        `cordy-desktop-${version}-mac-arm64.dmg`,
+        `cordy-desktop-${version}-mac-arm64.zip`,
+        `cordy-desktop-${version}-linux-x86_64.AppImage`,
+        `cordy-desktop-${version}-linux-arm64.AppImage`,
+        `cordy-desktop-${version}-linux-amd64.deb`,
+        `cordy-desktop-${version}-linux-arm64.deb`,
+      ];
+    },
     describeAsset: (file) => {
-      const match = /-(win|mac|linux)-(x64|x86_64|amd64|arm64)\./.exec(file);
-      if (!match) throw new Error(`cannot classify desktop asset: ${file}`);
-      // Normalise the platform-idiomatic token back to one display label, so
-      // the download table reads x64 / arm64 regardless of package format.
-      const arch = match[2] === 'arm64' ? 'arm64' : 'x64';
-      return { os: DESKTOP_OS[match[1]], arch };
+      // Handles both naming schemes: the 0.5.3-era cordy-Setup-* names, where
+      // macOS carries no platform token at all, and the current
+      // cordy-desktop-<version>-<os>-<arch> names.
+      const tagged = /-(win|mac|linux)-(x64|x86_64|amd64|arm64)\./.exec(file);
+      if (tagged) {
+        // Normalise the platform-idiomatic token back to one display label, so
+        // the download table reads x64 / arm64 regardless of package format.
+        return { os: DESKTOP_OS[tagged[1]], arch: tagged[2] === 'arm64' ? 'arm64' : 'x64' };
+      }
+      if (/\.exe(\.blockmap)?$/i.test(file)) return { os: 'Windows', arch: 'x64' };
+      // The 0.5.3 dmg/zip were Apple Silicon only and said so nowhere in the
+      // filename; every macOS build this project has produced is arm64.
+      if (/\.(dmg|zip)(\.blockmap)?$/i.test(file)) return { os: 'macOS', arch: 'arm64' };
+      throw new Error(`cannot classify desktop asset: ${file}`);
     },
   },
   chrome: {
     manifestId: 'chrome',
     displayName: 'Cordy for Chrome',
     publishable: true,
-    privateRepo: () => sourceRepo('CORDY_SOURCE_CHROME'),
+    privateRepo: 'DS-Studio/cordy-chrome',
     privateTagTemplate: 'v{version}',
     publicTagPrefix: 'chrome',
     latest: false,
-    assetPattern: (version) => [`cordy-chrome-${version}.zip`],
+    // WXT emits cordy-<version>-chrome.zip — product name first, target last.
+    // This is the name the extension was built, checksummed and submitted under.
+    assetPattern: (version) => [`cordy-${version}-chrome.zip`],
     describeAsset: () => ({ os: 'Chrome', arch: '—' }),
   },
   app: {
@@ -126,21 +171,6 @@ function usage() {
 
 function step(number, title) {
   console.log(`\n=== [${number}/12] ${title} ===`);
-}
-
-function sourceRepo(envName) {
-  const value = (process.env[envName] ?? '').trim();
-  if (!value) {
-    fail(`${envName} is not set. It must hold the owner/repo slug of the private source repository `
-      + '(kept out of this public repo on purpose).');
-  }
-  if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(value)) {
-    fail(`${envName} must look like owner/repo (got "${value}").`);
-  }
-  if (value.toLowerCase() === PUBLIC_REPO.toLowerCase()) {
-    fail(`${envName} points at the public repo; it must point at the private source repo.`);
-  }
-  return value;
 }
 
 function gh(args, { capture = false } = {}) {
@@ -303,7 +333,7 @@ async function main() {
   const manifestEntry = manifest.products.find((p) => p.id === config.manifestId);
   if (!manifestEntry) fail(`manifest.json has no product with id "${config.manifestId}"`);
 
-  const privateRepo = config.privateRepo();
+  const privateRepo = config.privateRepo;
   const privateTag = fillTemplate(config.privateTagTemplate, { version });
   const publicTag = `${config.publicTagPrefix}-v${version}`;
   const title = `${config.displayName} ${version}`;
@@ -334,10 +364,18 @@ async function main() {
   const present = fs.readdirSync(stagingDir)
     .filter((entry) => fs.statSync(path.join(stagingDir, entry)).isFile())
     .sort();
+  const ignored = new Set(config.ignorePattern ? config.ignorePattern(version) : []);
   const missing = expected.filter((file) => !present.includes(file));
-  const unexpected = present.filter((file) => !expected.includes(file) && !CHECKSUM_CANDIDATES.includes(file));
+  const unexpected = present.filter((file) => (
+    !expected.includes(file) && !ignored.has(file) && !isChecksumFile(file)
+  ));
   console.log(`downloaded     : ${present.length} file(s)`);
-  for (const file of present) console.log(`  - ${file}`);
+  for (const file of present) {
+    const role = expected.includes(file) ? 'publish'
+      : isChecksumFile(file) ? 'cross-check only'
+        : ignored.has(file) ? 'not republished' : 'UNEXPECTED';
+    console.log(`  - ${file}  [${role}]`);
+  }
   if (missing.length > 0) {
     fail(`source release is missing expected asset(s): ${missing.join(', ')}`);
   }
@@ -348,7 +386,7 @@ async function main() {
 
   // ---- 4. Checksums --------------------------------------------------------
   step(4, 'Compute SHA-256 and write SHASUMS256.txt');
-  const sourceChecksumFile = CHECKSUM_CANDIDATES.find((name) => present.includes(name));
+  const sourceChecksumFile = present.find((name) => isChecksumFile(name));
   const sourceChecksums = sourceChecksumFile
     ? parseChecksums(fs.readFileSync(path.join(stagingDir, sourceChecksumFile), 'utf8'))
     : null;

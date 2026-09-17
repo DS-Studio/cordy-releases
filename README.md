@@ -24,7 +24,9 @@ _No public build yet._
 
 ### Cordy for Chrome
 
-The Chrome Web Store is the only supported way to install this extension. Version 2.5.4 is currently awaiting Store review.
+**[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih)**
+
+Install from the Chrome Web Store — it is the only supported way to install this extension, and it keeps itself updated.
 
 _No public build yet._
 

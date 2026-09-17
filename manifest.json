@@ -26,9 +26,9 @@
       "releasedAt": null,
       "channel": {
         "kind": "chrome-web-store",
-        "url": null,
-        "note": "The Chrome Web Store is the only supported way to install this extension. Version 2.5.4 is currently awaiting Store review.",
-        "noteZh": "Chrome 应用商店是本扩展唯一受支持的安装方式。2.5.4 版本正在等待商店审核。"
+        "url": "https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih",
+        "note": "Install from the Chrome Web Store — it is the only supported way to install this extension, and it keeps itself updated.",
+        "noteZh": "请从 Chrome 应用商店安装——这是本扩展唯一受支持的安装方式，且会自动保持更新。"
       },
       "notes": "Any .zip attached to a release is a verification artifact for auditing the reviewed package, not an alternate install path.",
       "notesZh": "Release 中附带的 .zip 是用于核对已审核包内容的校验产物，不是另一条安装路径。",

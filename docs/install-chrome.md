@@ -6,12 +6,11 @@
 
 This is the supported way to install Cordy for Chrome:
 
-**<!-- TODO: Chrome Web Store listing URL -->**
+**https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih**
 
-Version **2.5.4 is currently awaiting Chrome Web Store review**. Until it's
-approved, the store listing may still show an older version or no listing at
-all. Installing from the Store gets you automatic updates and no Chrome
-warnings — use it unless you have a specific reason not to.
+The Store carries the current version. Installing from it gets you automatic
+updates and no Chrome warnings — use it unless you have a specific reason not
+to.
 
 ## What the .zip on this release is for
 
@@ -28,7 +27,7 @@ into Chrome to install it.
 
 ## Developer mode: for people who genuinely need it
 
-If you need to run this exact build before it's on the Store — for review,
+If you need to run this exact build rather than the Store copy — for review,
 testing, or auditing — you can load it unpacked:
 
 1. Download the `.zip` for this release.

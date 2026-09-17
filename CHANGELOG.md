@@ -116,14 +116,14 @@ Dates are the release dates recorded by each product. 中文版本见
 
 ## Cordy for Chrome
 
-### v2.5.4 — 2026-09-16
+### 2.5.4 — 2026-09-16
 
 - Updated the bundled privacy policy (English and Chinese) to more clearly distinguish local browsing data you have on your device from content you explicitly attach with @ mentions or that AI tools retrieve, including tab and bookmark titles, URLs, and visit times pulled into history-based context.
 - Removed outdated descriptions of AI bookmark tagging and categorization, and removed the incorrect claim that history and tab data never leave your device.
 - Clarified how API keys authenticate your requests to an AI provider, what data-use consent applies when using cloud AI, and the difference between on-device inference and AI running on a runtime endpoint you configure yourself.
-- This version is currently pending Chrome Web Store review; being listed here does not mean the Store has approved it yet.
+- This is the version currently published on the Chrome Web Store. The `.zip` attached to this release is the same reviewed package, provided so it can be audited — not as an alternate way to install.
 
-### v2.5.3 — 2026-09-16
+### 2.5.3 — 2026-09-16
 
 - Removed the custom New Tab page (its clock, wallpaper, and quick links), keeping the extension focused on its core productivity features.
 - Moved search back to the Dashboard with its own navigation entry restored; you can still scope a search to bookmarks, history, open tabs, read-later items, or collections, and general web search continues to use your default search engine.
@@ -131,7 +131,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Removing the New Tab feature does not delete any wallpaper or preference data you had previously saved.
 - Updated the Chrome Web Store listing and screenshots to remove New Tab promotional material.
 
-### v2.4.4 — 2026-09-10
+### 2.4.4 — 2026-09-10
 
 - Redesigned the sidebar navigation: it keeps a fixed, predictable order and clearly highlights the page you're on, with more compact icons and spacing.
 - The active navigation item is now visually connected to its page's toolbar with a continuous highlight line.
@@ -141,7 +141,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Your chosen font applies to interface text and content while code stays in a monospace font; new-tab wallpaper settings remain independently configurable.
 - Added contextual help for the new appearance settings and a way to reset only appearance, with support for all 12 languages and narrow window layouts.
 
-### v2.4.3 — 2026-09-08
+### 2.4.3 — 2026-09-08
 
 - Data cleanup tools no longer delete your bookmarks: both full and selective cleanup now leave bookmark data and your Chrome bookmarks untouched; deleting API keys remains a separate, explicit choice.
 - Fixed incorrect coloring on destructive action buttons, and you can now clean up application data even when you have no chat messages yet.
@@ -152,7 +152,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - You can now generate and compare multiple answer versions for a single message, and branch a conversation by continuing from an earlier answer or editing a previous prompt, without losing the original thread.
 - Translation settings (runtime, source/target languages, last-used models) now persist across sessions; long translations are no longer cut off partway through, and failures now explain which part of the text failed.
 
-### v2.4.2 — 2026-09-04
+### 2.4.2 — 2026-09-04
 
 - Important: this version requires Chrome 148 or later (previously 142), because it relies on Chrome's built-in AI features that only fully work starting in Chrome 148; Chrome 142–147 can no longer install or update the extension.
 - Unified the model picker used across the dashboard, side panel settings, translation, and chat composer into one consistent picker, with clearer provider status indicators and pricing now shown correctly in USD per million tokens.
@@ -163,7 +163,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Security: after you revoke a site's permission, any of Cordy's scripts still running on already-open tabs of that site immediately lose access to cloud AI, page content, and text-to-speech; dead-link checking no longer contacts sites you haven't granted access to.
 - Reduced the install size from roughly 50MB to 32MB, and fixed several local audio and AI playback issues, including a voice pack file that had been silently rejected.
 
-### v2.4.1 — 2026-08-13
+### 2.4.1 — 2026-08-13
 
 - Fixed a serious bug where the offline "clean up dead links" tool could end up with every bookmark in your library pre-selected for deletion, including live links it simply couldn't reach at that moment; now only bookmarks confirmed to be genuinely dead are pre-selected, and everything else stays visible and can still be removed individually.
 - Fixed backup restore being completely broken for any backup that included chat history — restoring now actually works.
@@ -174,7 +174,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Editing a previously saved tab now actually works (it had shown a "coming soon" message since it was first added), and batch actions in Collections and Read Later are now reachable from the interface.
 - Translated roughly 5,500 previously English-only interface strings across all 12 supported languages, and added proper right-to-left layout support for Arabic.
 
-### v2.4.0 — 2026-08-12
+### 2.4.0 — 2026-08-12
 
 - Removed AI-powered bookmark tagging, categorization, and the "Insights" summary feature; your existing bookmarks and tags are unaffected, but new AI tags or summaries can no longer be generated from this version onward.
 - Removed the experimental cross-device "browser connector" companion feature entirely; it never shipped in a stable release, so most users will not notice any difference.
@@ -185,7 +185,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Added a single-turn mode toggle for chat, so a conversation can skip carrying forward earlier context when you want a clean, one-off exchange.
 - Refreshed the visual design with a unified icon-button style, a simplified two-group sidebar, and a redesigned date-range picker.
 
-### v2.3.3 — 2026-07-16
+### 2.3.3 — 2026-07-16
 
 - Restructured the Settings page for clearer organization, and added local, exportable logs so you can see what happened during a session.
 - Chat now shows a context-usage ring so you can see how much of the model's context window a conversation is using, and conversations are automatically named after your first message.
@@ -195,7 +195,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Site-access permissions are now requested only when needed rather than granted automatically at install, and several inaccuracies in the bundled privacy policy were corrected.
 - Completed translations for the context-usage ring, bookmarks, settings, and other recently added features across all 12 supported languages.
 
-### v2.3.2 — 2026-07-12
+### 2.3.2 — 2026-07-12
 
 - Rebuilt the chat engine end to end: branching a conversation, by editing a past message or continuing from an earlier answer, is now handled correctly everywhere, and having the same conversation open in two windows no longer corrupts message order.
 - Stopping a reply partway through no longer discards it — the partial answer is saved, and tool actions you declined now show as declined instead of appearing to hang or silently succeed.
@@ -206,7 +206,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Reduced the extension's install size from about 97MB to 25.5MB.
 - Browsing history, read-later, favorites, and conversation history are now part of the main dashboard, and bookmarks gained a real folder tree you can reorganize by dragging.
 
-### v2.3.1 — 2026-06-24
+### 2.3.1 — 2026-06-24
 
 - Page content and text you select on a page are now always treated as untrusted input before being sent to the AI, closing a way malicious page content could hijack the assistant's instructions.
 - Added a master switch to disable the AI's ability to use browser tools (like opening tabs) entirely, and turned on manual approval by default for any tool action that writes data or does something sensitive.
@@ -217,7 +217,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Performance: on-page text-selection features unload after a minute of inactivity to save memory, streaming replies keep the extension active so long conversations no longer fail with a fetch error, and reply text now streams in noticeably smoother instead of in stuttering bursts.
 - Fixed several rough edges, including switching conversation tabs with a touchpad and a text-selection menu that could get stuck if dismissed and reopened quickly.
 
-### v2.3.0 — 2026-06-15
+### 2.3.0 — 2026-06-15
 
 - You can now bring browser content into a chat by typing @ and picking an open tab, bookmark, or history entry; the referenced page's content is automatically pulled in as context for the AI.
 - Added a dedicated Translation page in the dashboard: choose source and target languages and a default, local, or cloud translation engine, translate long text in chunks with live streaming output, and stop, retry, copy, or clear at any time.
