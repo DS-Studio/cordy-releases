@@ -1,0 +1,36 @@
+name: "Documentation issue"
+description: Report a problem with the README, changelog, or docs in this repository.
+title: "[Docs] "
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for problems with the documentation **in this
+        repository** (README, CHANGELOG, install guides) or on
+        https://cordy.dsdev.cn — not for product bugs.
+
+  - type: input
+    id: location
+    attributes:
+      label: Page or file
+      description: The file path or URL where the problem is.
+      placeholder: "README.md, docs/install-windows.md, https://cordy.dsdev.cn/..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong
+      description: Describe what's missing, incorrect, or unclear.
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested fix
+    validations:
+      required: false

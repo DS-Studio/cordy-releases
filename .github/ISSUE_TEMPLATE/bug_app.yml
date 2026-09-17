@@ -1,0 +1,75 @@
+name: "Bug report: CordyAI"
+description: Report a problem with CordyAI's published changelog or documentation.
+title: "[CordyAI] "
+labels:
+  - bug
+  - "product: app"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+
+        **Product source code is not hosted in this repository.** This tracker
+        is for issues with **published CordyAI builds** — not for source-level
+        bug reports.
+
+  - type: markdown
+    attributes:
+      value: |
+        **Before you file:** there is no public CordyAI build yet. Reports
+        should concern the published changelog or documentation only, not an
+        installed app.
+
+  - type: input
+    id: version
+    attributes:
+      label: CordyAI version
+      description: The version from the changelog you're reporting about.
+      placeholder: "0.5.0"
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Android version and device
+      description: The Android version and device model, if relevant to your report.
+      placeholder: "Android 14, Pixel 8"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: A clear description of the problem you observed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The exact steps that lead to the problem.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: This report does not contain any secrets, API keys, tokens, or personal data.
+          required: true

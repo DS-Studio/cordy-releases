@@ -1,0 +1,64 @@
+{
+  "generated": "2026-09-18T00:00:00Z",
+  "site": "https://cordy.dsdev.cn",
+  "repo": "DS-Studio/cordy-releases",
+  "products": [
+    {
+      "id": "desktop",
+      "name": "Cordy Desktop",
+      "nameZh": "Cordy 桌面端",
+      "status": "unreleased",
+      "version": null,
+      "tag": null,
+      "releasedAt": null,
+      "channel": null,
+      "notes": "Windows x64 and macOS Apple Silicon only. Windows installers are not code-signed and macOS builds are not notarized, so your operating system will warn you on first run.",
+      "notesZh": "仅支持 Windows x64 与 macOS Apple Silicon。Windows 安装包未做代码签名，macOS 构建未经公证，首次运行时系统会弹出安全警告。",
+      "assets": []
+    },
+    {
+      "id": "chrome",
+      "name": "Cordy for Chrome",
+      "nameZh": "Cordy 浏览器扩展",
+      "status": "unreleased",
+      "version": null,
+      "tag": null,
+      "releasedAt": null,
+      "channel": {
+        "kind": "chrome-web-store",
+        "url": null,
+        "note": "The Chrome Web Store is the only supported way to install this extension. Version 2.5.4 is currently awaiting Store review.",
+        "noteZh": "Chrome 应用商店是本扩展唯一受支持的安装方式。2.5.4 版本正在等待商店审核。"
+      },
+      "notes": "Any .zip attached to a release is a verification artifact for auditing the reviewed package, not an alternate install path.",
+      "notesZh": "Release 中附带的 .zip 是用于核对已审核包内容的校验产物，不是另一条安装路径。",
+      "assets": []
+    },
+    {
+      "id": "app",
+      "name": "CordyAI",
+      "nameZh": "CordyAI",
+      "status": "unreleased",
+      "version": null,
+      "tag": null,
+      "releasedAt": null,
+      "channel": null,
+      "notes": "No publicly downloadable build yet. The changelog is published here ahead of the first public build.",
+      "notesZh": "尚无可公开下载的构建。首个公开构建发布前，更新日志先在此处维护。",
+      "assets": []
+    },
+    {
+      "id": "tabmori",
+      "name": "Tabmori",
+      "nameZh": "Tabmori",
+      "status": "unreleased",
+      "version": null,
+      "tag": null,
+      "releasedAt": null,
+      "channel": null,
+      "notes": "No publicly downloadable build yet.",
+      "notesZh": "尚无可公开下载的构建。",
+      "assets": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# This repository holds text and scripts only. Build artifacts live in
+# GitHub Release assets and must never be committed.
+
+# Release artifacts, staged locally by scripts/publish.mjs
+/tmp/
+*.exe
+*.dmg
+*.deb
+*.zip
+*.AppImage
+*.blockmap
+*.apk
+*.aab
+SHASUMS256.txt
+
+# Tooling noise
+node_modules/
+.DS_Store
+Thumbs.db
+*.log

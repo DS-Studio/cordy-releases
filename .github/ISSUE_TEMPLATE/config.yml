@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation & product site
+    url: https://cordy.dsdev.cn
+    about: Guides, installation instructions, and product information.
+  - name: Security vulnerability
+    url: https://github.com/DS-Studio/cordy-releases/security/advisories/new
+    about: Report a security vulnerability privately. Do not open a public issue.

@@ -1,0 +1,75 @@
+name: "Bug report: Tabmori"
+description: Report a problem with Tabmori's published changelog or documentation.
+title: "[Tabmori] "
+labels:
+  - bug
+  - "product: tabmori"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+
+        **Product source code is not hosted in this repository.** This tracker
+        is for issues with **published Tabmori builds** — not for
+        source-level bug reports.
+
+  - type: markdown
+    attributes:
+      value: |
+        **Before you file:** there is no public Tabmori build yet. Reports
+        should concern the published changelog or documentation only, not an
+        installed extension.
+
+  - type: input
+    id: version
+    attributes:
+      label: Tabmori version
+      description: The version from the changelog you're reporting about.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and version
+      description: The browser and its version number.
+      placeholder: "Chrome 128.0.6613.84"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: A clear description of the problem you observed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The exact steps that lead to the problem.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: This report does not contain any secrets, API keys, tokens, or personal data.
+          required: true

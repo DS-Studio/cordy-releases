@@ -1,0 +1,30 @@
+name: guard
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Leak scan
+        run: node scripts/leakscan.mjs
+
+      - name: README/manifest drift
+        run: node scripts/render.mjs --check
+
+      - name: Manifest is valid JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('manifest.json','utf8'))"

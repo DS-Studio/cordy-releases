@@ -1,0 +1,47 @@
+name: "Feature request"
+description: Suggest an idea for one of the Cordy products or Tabmori.
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. **Product source code is not hosted in
+        this repository**, so this is a place to propose ideas, not to submit
+        code changes.
+
+  - type: dropdown
+    id: product
+    attributes:
+      label: Which product is this for?
+      options:
+        - Cordy Desktop
+        - Cordy for Chrome
+        - CordyAI
+        - Tabmori
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the situation you're in and why it's a problem.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to happen?
+      description: Describe the feature or change you'd like to see.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+    validations:
+      required: false
