@@ -15,25 +15,29 @@ Cordy 系列产品的公开下载、更新日志与问题反馈入口。
 
 <!-- BEGIN:DOWNLOADS -->
 
-### Cordy 桌面端
+### Cordy 桌面端 0.5.3
 
-_暂无公开构建。_
+发布于 2026-09-17 · [发布说明](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3)
+
+| 平台 | 架构 | 文件 | 大小 | SHA-256 |
+| --- | --- | --- | --- | --- |
+| Windows | x64 | [cordy-Setup-0.5.3.exe](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3.exe) | 112.3 MB | `785338759ac0` |
+| macOS | arm64 | [cordy-Setup-0.5.3.dmg](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3.dmg) | 130.7 MB | `4609064b04b0` |
+| macOS | arm64 | [cordy-Setup-0.5.3.zip](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3.zip) | 126.2 MB | `14c2feaf7d54` |
+| Linux | x64 | [cordy-Setup-0.5.3-linux-x64.AppImage](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-x64.AppImage) | 137.4 MB | `546b1ec39169` |
+| Linux | arm64 | [cordy-Setup-0.5.3-linux-arm64.AppImage](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-arm64.AppImage) | 138.4 MB | `44547751054c` |
+| Linux | x64 | [cordy-Setup-0.5.3-linux-x64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-x64.deb) | 108.5 MB | `a7cc16e503c8` |
+| Linux | arm64 | [cordy-Setup-0.5.3-linux-arm64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-arm64.deb) | 103.6 MB | `310a9c7e2227` |
 
 > 仅支持 Windows x64 与 macOS Apple Silicon。Windows 安装包未做代码签名，macOS 构建未经公证，首次运行时系统会弹出安全警告。
 
-### Cordy 浏览器扩展 2.5.4
+### Cordy 浏览器扩展
 
 **[从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih)**
 
 请从 Chrome 应用商店安装——这是本扩展唯一受支持的安装方式，且会自动保持更新。
 
-发布于 2026-09-17 · [发布说明](https://github.com/DS-Studio/cordy-releases/releases/tag/chrome-v2.5.4)
-
-以下文件是已发布包的校验产物：
-
-| 平台 | 架构 | 文件 | 大小 | SHA-256 |
-| --- | --- | --- | --- | --- |
-| Chrome | — | [cordy-2.5.4-chrome.zip](https://github.com/DS-Studio/cordy-releases/releases/download/chrome-v2.5.4/cordy-2.5.4-chrome.zip) | 13.4 MB | `1a0fbe7c73d1` |
+_暂无公开构建。_
 
 > Release 中附带的 .zip 是用于核对已审核包内容的校验产物，不是另一条安装路径。
 
@@ -89,6 +93,7 @@ GitHub 的「Latest」徽章是仓库级的单一指针，没有按产品区分�
 其他产品请通过各自的标签或上方表格查找。
 
 已发布的 Release 不可变：资产与标签在发布后即被冻结，并自动附带构建证明。
+发布流程本身、以及这种不可变性在出错时的代价，记录在 [docs/releasing.md](docs/releasing.md)（英文）。
 
 ## 许可
 

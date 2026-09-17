@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-17T19:21:46.215Z",
+  "generated": "2026-09-17T20:32:41.520Z",
   "site": "https://cordy.dsdev.cn",
   "repo": "DS-Studio/cordy-releases",
   "products": [
@@ -7,23 +7,73 @@
       "id": "desktop",
       "name": "Cordy Desktop",
       "nameZh": "Cordy 桌面端",
-      "status": "unreleased",
-      "version": null,
-      "tag": null,
-      "releasedAt": null,
+      "status": "released",
+      "version": "0.5.3",
+      "tag": "desktop-v0.5.3",
+      "releasedAt": "2026-09-17T20:32:41.520Z",
       "channel": null,
       "notes": "Windows x64 and macOS Apple Silicon only. Windows installers are not code-signed and macOS builds are not notarized, so your operating system will warn you on first run.",
       "notesZh": "仅支持 Windows x64 与 macOS Apple Silicon。Windows 安装包未做代码签名，macOS 构建未经公证，首次运行时系统会弹出安全警告。",
-      "assets": []
+      "assets": [
+        {
+          "file": "cordy-Setup-0.5.3.exe",
+          "os": "Windows",
+          "arch": "x64",
+          "size": 117720184,
+          "sha256": "785338759ac0fe3878e528fd7798e230345ee42c158d9d7821213a7e21ac6f89"
+        },
+        {
+          "file": "cordy-Setup-0.5.3.dmg",
+          "os": "macOS",
+          "arch": "arm64",
+          "size": 137023127,
+          "sha256": "4609064b04b0f8b9e20638e00262052df97baa6ca8db7334d5a34cf5072595c9"
+        },
+        {
+          "file": "cordy-Setup-0.5.3.zip",
+          "os": "macOS",
+          "arch": "arm64",
+          "size": 132323718,
+          "sha256": "14c2feaf7d54c00468c98ebe2215711d7ad4e2a85041bb227a7537dac4d16f53"
+        },
+        {
+          "file": "cordy-Setup-0.5.3-linux-x64.AppImage",
+          "os": "Linux",
+          "arch": "x64",
+          "size": 144117189,
+          "sha256": "546b1ec391693c07e60ed2d492dab417fb3d02a050d7642090c2c327cc32366f"
+        },
+        {
+          "file": "cordy-Setup-0.5.3-linux-arm64.AppImage",
+          "os": "Linux",
+          "arch": "arm64",
+          "size": 145159559,
+          "sha256": "44547751054c662a06d3f47c0758049bd67049dc0900427278730dbf34b2badc"
+        },
+        {
+          "file": "cordy-Setup-0.5.3-linux-x64.deb",
+          "os": "Linux",
+          "arch": "x64",
+          "size": 113795396,
+          "sha256": "a7cc16e503c89ab4198a54bf0b37de623d9b26a0d9bbc7a6fe56ba02e0000721"
+        },
+        {
+          "file": "cordy-Setup-0.5.3-linux-arm64.deb",
+          "os": "Linux",
+          "arch": "arm64",
+          "size": 108632640,
+          "sha256": "310a9c7e22272be117e9f57e6ad419e56101dda73ffb86f36f190e363d1db969"
+        }
+      ]
     },
     {
       "id": "chrome",
       "name": "Cordy for Chrome",
       "nameZh": "Cordy 浏览器扩展",
-      "status": "released",
-      "version": "2.5.4",
-      "tag": "chrome-v2.5.4",
-      "releasedAt": "2026-09-17T19:21:46.215Z",
+      "status": "unreleased",
+      "version": null,
+      "tag": null,
+      "releasedAt": null,
       "channel": {
         "kind": "chrome-web-store",
         "url": "https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih",
@@ -32,15 +82,7 @@
       },
       "notes": "Any .zip attached to a release is a verification artifact for auditing the reviewed package, not an alternate install path.",
       "notesZh": "Release 中附带的 .zip 是用于核对已审核包内容的校验产物，不是另一条安装路径。",
-      "assets": [
-        {
-          "file": "cordy-2.5.4-chrome.zip",
-          "os": "Chrome",
-          "arch": "—",
-          "size": 14024378,
-          "sha256": "1a0fbe7c73d150a0b982859610dd5fe02fd9cdaaa866a25656588d69446fd504"
-        }
-      ]
+      "assets": []
     },
     {
       "id": "app",

@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '17 6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -28,3 +30,21 @@ jobs:
 
       - name: Manifest is valid JSON
         run: node -e "JSON.parse(require('node:fs').readFileSync('manifest.json','utf8'))"
+
+  # Separate job: this one reaches the network, so a GitHub outage must not fail
+  # a pull request. It runs on a schedule and on demand, and catches a manifest
+  # that still advertises a release which no longer exists.
+  links:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Download links resolve
+        run: node scripts/linkcheck.mjs --readme

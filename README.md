@@ -16,25 +16,29 @@ published builds can be downloaded, verified, and discussed in one place.
 
 <!-- BEGIN:DOWNLOADS -->
 
-### Cordy Desktop
+### Cordy Desktop 0.5.3
 
-_No public build yet._
+Released 2026-09-17 · [Release notes](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3)
+
+| Platform | Architecture | File | Size | SHA-256 |
+| --- | --- | --- | --- | --- |
+| Windows | x64 | [cordy-Setup-0.5.3.exe](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3.exe) | 112.3 MB | `785338759ac0` |
+| macOS | arm64 | [cordy-Setup-0.5.3.dmg](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3.dmg) | 130.7 MB | `4609064b04b0` |
+| macOS | arm64 | [cordy-Setup-0.5.3.zip](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3.zip) | 126.2 MB | `14c2feaf7d54` |
+| Linux | x64 | [cordy-Setup-0.5.3-linux-x64.AppImage](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-x64.AppImage) | 137.4 MB | `546b1ec39169` |
+| Linux | arm64 | [cordy-Setup-0.5.3-linux-arm64.AppImage](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-arm64.AppImage) | 138.4 MB | `44547751054c` |
+| Linux | x64 | [cordy-Setup-0.5.3-linux-x64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-x64.deb) | 108.5 MB | `a7cc16e503c8` |
+| Linux | arm64 | [cordy-Setup-0.5.3-linux-arm64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-arm64.deb) | 103.6 MB | `310a9c7e2227` |
 
 > Windows x64 and macOS Apple Silicon only. Windows installers are not code-signed and macOS builds are not notarized, so your operating system will warn you on first run.
 
-### Cordy for Chrome 2.5.4
+### Cordy for Chrome
 
 **[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih)**
 
 Install from the Chrome Web Store — it is the only supported way to install this extension, and it keeps itself updated.
 
-Released 2026-09-17 · [Release notes](https://github.com/DS-Studio/cordy-releases/releases/tag/chrome-v2.5.4)
-
-The files below are verification artifacts for the published package:
-
-| Platform | Architecture | File | Size | SHA-256 |
-| --- | --- | --- | --- | --- |
-| Chrome | — | [cordy-2.5.4-chrome.zip](https://github.com/DS-Studio/cordy-releases/releases/download/chrome-v2.5.4/cordy-2.5.4-chrome.zip) | 13.4 MB | `1a0fbe7c73d1` |
+_No public build yet._
 
 > Any .zip attached to a release is a verification artifact for auditing the reviewed package, not an alternate install path.
 
@@ -95,7 +99,9 @@ concept, so it tracks **Cordy Desktop**. For any other product, use its tag or
 the table above.
 
 Published releases are immutable: assets and tags are frozen once published and
-carry an automatic build attestation.
+carry an automatic build attestation. How a release is produced, and what that
+immutability costs when something goes wrong, is written down in
+[docs/releasing.md](docs/releasing.md).
 
 ## License
 

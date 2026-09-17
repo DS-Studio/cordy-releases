@@ -202,6 +202,46 @@ function step(number, title) {
   console.log(`\n=== [${number}/12] ${title} ===`);
 }
 
+/** Numeric release id, needed by the asset REST endpoints. */
+function releaseId(tag) {
+  const r = gh(['release', 'view', tag, '-R', PUBLIC_REPO, '--json', 'databaseId', '--jq', '.databaseId'], { capture: true });
+  return (r.stdout ?? '').trim();
+}
+
+/** Delete an asset by name, whatever state it is in. Frees the name for reuse. */
+function purgeAsset(tag, name) {
+  const id = gh(['api', `repos/${PUBLIC_REPO}/releases/${releaseId(tag)}/assets`, '--jq', `.[] | select(.name=="${name}") | .id`], { capture: true });
+  const assetId = (id.stdout ?? '').trim();
+  if (assetId) gh(['api', '-X', 'DELETE', `repos/${PUBLIC_REPO}/releases/assets/${assetId}`], { capture: true });
+  return Boolean(assetId);
+}
+
+/**
+ * Upload one asset with a plain POST to uploads.github.com, bypassing the gh
+ * CLI's own upload path. Used as the fallback when `gh release upload` fails.
+ */
+async function uploadAssetDirect(tag, file, name) {
+  const token = gh(['auth', 'token'], { capture: true });
+  if (token.status !== 0) fail('could not read a token from `gh auth token` for the direct upload fallback');
+  const body = fs.readFileSync(file);
+  const url = `https://uploads.github.com/repos/${PUBLIC_REPO}/releases/${releaseId(tag)}/assets?name=${encodeURIComponent(name)}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${(token.stdout ?? '').trim()}`,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/octet-stream',
+      'Content-Length': String(body.length),
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+    body,
+  });
+  if (!res.ok) {
+    const text = (await res.text()).slice(0, 400);
+    fail(`direct upload of ${name} failed: HTTP ${res.status} ${res.statusText} — ${text}`);
+  }
+}
+
 function gh(args, { capture = false } = {}) {
   const result = spawnSync('gh', args, {
     encoding: 'utf8',
@@ -536,40 +576,64 @@ async function main() {
     // must therefore be the normal path, not a manual rescue.
     step(7, 'Upload assets to the draft');
     const wanted = [...assets.map((a) => a.path), checksumsPath];
-    const sizeOnRelease = () => {
-      const probe = gh(['release', 'view', publicTag, '-R', PUBLIC_REPO, '--json', 'assets', '--jq', '.assets[] | "\\(.name)\\t\\(.size)"'], { capture: true });
+
+    // Size alone is not proof an asset arrived. A failed upload can leave the
+    // asset in state "starter": it holds the name and reports the full expected
+    // size while containing no bytes. Skipping one of those would publish a
+    // download link that 404s, and `gh release upload --clobber` cannot replace
+    // it — every retry gets HTTP 500 until the record is deleted. So: read the
+    // state, treat anything that is not "uploaded" as absent, and delete it
+    // first to free the name.
+    const assetsOnRelease = () => {
+      const probe = gh(['release', 'view', publicTag, '-R', PUBLIC_REPO, '--json', 'assets', '--jq', '.assets[] | "\\(.name)\\t\\(.size)\\t\\(.state)"'], { capture: true });
       const map = new Map();
       if (probe.status === 0) {
         for (const line of (probe.stdout ?? '').split('\n')) {
-          const [name, size] = line.trim().split('\t');
-          if (name) map.set(name, Number(size));
+          const [name, size, state] = line.trim().split('\t');
+          if (name) map.set(name, { size: Number(size), state });
         }
       }
       return map;
     };
+    const isComplete = (entry, localSize) => entry && entry.state === 'uploaded' && entry.size === localSize;
 
-    let present = sizeOnRelease();
+    let present = assetsOnRelease();
     let uploaded = 0;
     let skipped = 0;
     for (const file of wanted) {
       const name = path.basename(file);
       const localSize = fs.statSync(file).size;
-      if (present.get(name) === localSize) {
+      const entry = present.get(name);
+      if (isComplete(entry, localSize)) {
         console.log(`  skip     ${name} (already on the draft, ${formatSize(localSize)})`);
         skipped += 1;
         continue;
       }
-      ghOrFail([
-        'release', 'upload', publicTag, '-R', PUBLIC_REPO, file, '--clobber',
-      ], `could not upload ${name} to ${publicTag}`, { capture: false });
-      console.log(`  uploaded ${name} (${formatSize(localSize)})`);
+      if (entry) {
+        console.log(`  purge    ${name} (state "${entry.state}", incomplete — removing before re-upload)`);
+        purgeAsset(publicTag, name);
+      }
+      const viaGh = gh(['release', 'upload', publicTag, '-R', PUBLIC_REPO, file, '--clobber'], { capture: true });
+      if (viaGh.status === 0) {
+        console.log(`  uploaded ${name} (${formatSize(localSize)})`);
+      } else {
+        // `gh release upload` has been observed to fail repeatedly with
+        // HTTP 500 "Error saving asset" on a file that uploads fine with a
+        // plain POST to uploads.github.com — same bytes, same name, same
+        // credentials. Each failure also leaves a "starter" stub holding the
+        // name, so purge before retrying.
+        console.log(`  retry    ${name} — gh upload failed (${(viaGh.stderr || '').trim().split('\n')[0]}), posting directly`);
+        purgeAsset(publicTag, name);
+        await uploadAssetDirect(publicTag, file, name);
+        console.log(`  uploaded ${name} (${formatSize(localSize)}, direct upload)`);
+      }
       uploaded += 1;
     }
 
-    present = sizeOnRelease();
-    const notUploaded = wanted.filter((f) => present.get(path.basename(f)) !== fs.statSync(f).size);
+    present = assetsOnRelease();
+    const notUploaded = wanted.filter((f) => !isComplete(present.get(path.basename(f)), fs.statSync(f).size));
     if (notUploaded.length > 0) {
-      fail(`draft ${publicTag} is missing or has the wrong size for: ${notUploaded.map((f) => path.basename(f)).join(', ')}`);
+      fail(`draft ${publicTag} is missing, incomplete, or the wrong size for: ${notUploaded.map((f) => path.basename(f)).join(', ')}`);
     }
     const stray = [...present.keys()].filter((n) => !wanted.some((f) => path.basename(f) === n));
     if (stray.length > 0) {
