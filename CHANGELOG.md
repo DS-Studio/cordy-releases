@@ -19,7 +19,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Restarting the background runtime now leaves terminals usable and shows accurate agent status, instead of leaving stale "running" agents behind.
 - A terminal-creation timeout no longer leaves a hidden shell process running in the background.
 - Cmd+Q now quits Cordy properly on macOS even while a coding agent's terminal UI has focus.
-- This release does not include a Windows installer.
+- The Windows installer is still not code-signed, so Windows SmartScreen shows an "unrecognised app" warning on first run.
 - The macOS build uses a local development signing identity and is not notarized.
 - Linux sandboxed startup and AppImage mounting on an ordinary desktop have not been fully verified.
 

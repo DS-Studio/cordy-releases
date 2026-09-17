@@ -16,7 +16,7 @@ Cordy 系列产品的公开发布历史。每个产品一个章节，新版本�
 - 重启后台 runtime 后终端保持可用，agent 状态显示准确，不再留下虚假的"运行中"agent。
 - 终端创建超时后不再留下隐藏运行的 shell 进程。
 - macOS 上 coding-agent 终端界面聚焦时，Cmd+Q 现在也能正常退出 Cordy。
-- 本版本不包含 Windows 安装包。
+- Windows 安装包仍未进行代码签名，首次运行时 Windows SmartScreen 会显示"未识别应用"提示。
 - macOS 版本使用本地开发签名身份，未经过公证。
 - Linux 上的沙盒启动与 AppImage 挂载在普通桌面环境下尚未完全验证。
 

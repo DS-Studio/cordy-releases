@@ -94,6 +94,8 @@ const EXPECTED_ASSETS = {
       // unrepeatable, so this script does not do it — not even to tidy up.
       if (version === '0.5.3') {
         return [
+          `cordy-Setup-${version}.exe`,
+          `cordy-Setup-${version}.exe.blockmap`,
           `cordy-Setup-${version}.dmg`,
           `cordy-Setup-${version}.dmg.blockmap`,
           `cordy-Setup-${version}.zip`,
