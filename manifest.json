@@ -12,8 +12,8 @@
       "tag": "desktop-v0.5.3",
       "releasedAt": "2026-09-17T20:32:41.520Z",
       "channel": null,
-      "notes": "Windows x64 and macOS Apple Silicon only. Windows installers are not code-signed and macOS builds are not notarized, so your operating system will warn you on first run.",
-      "notesZh": "仅支持 Windows x64 与 macOS Apple Silicon。Windows 安装包未做代码签名，macOS 构建未经公证，首次运行时系统会弹出安全警告。",
+      "notes": "Windows x64, macOS Apple Silicon, and Linux x64/arm64. There is no Intel Mac build and no Windows-on-ARM build. Windows installers are not code-signed and macOS builds are not notarized, so those two warn you on first run — see the install guides. On macOS take the .dmg unless you specifically want the raw .app; on Linux take the .AppImage unless you prefer system package management.",
+      "notesZh": "支持 Windows x64、macOS Apple Silicon，以及 Linux x64/arm64。没有 Intel Mac 版本，也没有 Windows on ARM 版本。Windows 安装包未做代码签名，macOS 构建未经公证，这两个平台首次运行时系统会弹出警告——见安装文档。macOS 请选 .dmg（除非你确实需要裸 .app）；Linux 请选 .AppImage（除非你希望走系统包管理）。",
       "assets": [
         {
           "file": "cordy-Setup-0.5.3.exe",
@@ -80,8 +80,8 @@
         "note": "Install from the Chrome Web Store — it is the only supported way to install this extension, and it keeps itself updated.",
         "noteZh": "请从 Chrome 应用商店安装——这是本扩展唯一受支持的安装方式，且会自动保持更新。"
       },
-      "notes": "Any .zip attached to a release is a verification artifact for auditing the reviewed package, not an alternate install path.",
-      "notesZh": "Release 中附带的 .zip 是用于核对已审核包内容的校验产物，不是另一条安装路径。",
+      "notes": "No build of the extension is published in this repository. Its changelog is maintained here; the Store is the only place to get it.",
+      "notesZh": "本仓库没有发布扩展的构建包。这里维护它的更新日志，获取渠道只有应用商店。",
       "assets": []
     },
     {

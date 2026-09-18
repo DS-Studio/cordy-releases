@@ -22,6 +22,8 @@ import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const MANIFEST_PATH = path.join(REPO_ROOT, 'manifest.json');
+/** Pinned here, not read from the manifest — see assertManifest. */
+const PUBLIC_REPO = 'DS-Studio/cordy-releases';
 const BEGIN_MARKER = '<!-- BEGIN:DOWNLOADS -->';
 const END_MARKER = '<!-- END:DOWNLOADS -->';
 
@@ -150,8 +152,12 @@ function productBlock(manifest, product, lang) {
 
 function assertManifest(manifest) {
   if (!manifest || typeof manifest !== 'object') throw new Error('manifest: root must be an object');
-  if (typeof manifest.repo !== 'string' || !manifest.repo.includes('/')) {
-    throw new Error('manifest: "repo" must be an owner/name string');
+  // Pinned, not merely well-formed. Every download URL on the front page is
+  // built from this string, so a one-line manifest edit in a pull request could
+  // otherwise repoint all of them at another repository while the leak scan,
+  // the drift check and the JSON check all still report green.
+  if (manifest.repo !== PUBLIC_REPO) {
+    throw new Error(`manifest: "repo" must be exactly "${PUBLIC_REPO}" (got ${JSON.stringify(manifest.repo)})`);
   }
   if (!Array.isArray(manifest.products) || manifest.products.length === 0) {
     throw new Error('manifest: "products" must be a non-empty array');
@@ -165,13 +171,22 @@ function assertManifest(manifest) {
     if (!Array.isArray(product.assets)) throw new Error(`manifest: ${product.id} needs an "assets" array`);
     if (product.status === 'released') {
       if (typeof product.version !== 'string' || !product.version) throw new Error(`manifest: ${product.id} needs a "version"`);
-      if (typeof product.tag !== 'string' || !product.tag) throw new Error(`manifest: ${product.id} needs a "tag"`);
+      // A tag or filename goes straight into a download URL, so constrain both
+      // to a single safe path segment. Without this, a tag of
+      // "../../../elsewhere/releases/tag/x" traverses out of this repository
+      // and the rendered link points somewhere else entirely.
+      if (typeof product.tag !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(product.tag)) {
+        throw new Error(`manifest: ${product.id} "tag" must be a single path segment (got ${JSON.stringify(product.tag)})`);
+      }
       if (typeof product.releasedAt !== 'string') throw new Error(`manifest: ${product.id} needs a "releasedAt"`);
       for (const asset of product.assets) {
         for (const field of ['file', 'os', 'arch']) {
           if (typeof asset[field] !== 'string' || !asset[field]) {
             throw new Error(`manifest: ${product.id} asset is missing "${field}"`);
           }
+        }
+        if (!/^[A-Za-z0-9][A-Za-z0-9._+-]*$/.test(asset.file)) {
+          throw new Error(`manifest: ${product.id} asset "file" must be a plain filename (got ${JSON.stringify(asset.file)})`);
         }
       }
     }

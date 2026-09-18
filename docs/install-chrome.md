@@ -12,27 +12,31 @@ The Store carries the current version. Installing from it gets you automatic
 updates and no Chrome warnings — use it unless you have a specific reason not
 to.
 
-## What the .zip on this release is for
+## There is no download for the extension here
 
-Every release also attaches a `.zip` of the extension (~13.4MB). **This is a
-verification artifact, not an alternate way to install the extension.** It
-lets you inspect the exact package that was submitted for Chrome Web Store
-review — useful for an audit, not for day-to-day installation.
+**No build of Cordy for Chrome is currently published in this repository.** The
+Chrome Web Store above is the only place to get it. This page stays because the
+extension's changelog is published here, and because the question "where is the
+.zip?" has a real answer below.
+
+If a `.zip` is attached to a future release, it will be a **verification
+artifact, not an alternate way to install** — a copy of the exact package that
+was submitted for Chrome Web Store review, so it can be audited.
 
 Chrome does not let ordinary users install a packed extension from an
-arbitrary source. Since Chrome 33 on Windows and Chrome 44 on macOS, Chrome
-blocks installing extensions except through the Chrome Web Store unless you
-turn on Developer mode yourself. The zip cannot be double-clicked or dragged
-into Chrome to install it.
+arbitrary source anyway. Since Chrome 33 on Windows and Chrome 44 on macOS,
+Chrome blocks installing extensions except through the Chrome Web Store unless
+you turn on Developer mode yourself. Such a zip cannot be double-clicked or
+dragged into Chrome to install it.
 
 ## Developer mode: for people who genuinely need it
 
-If you need to run this exact build rather than the Store copy — for review,
-testing, or auditing — you can load it unpacked:
+This applies only if you have obtained a package some other way — there is
+nothing to download here today. To load an unpacked build:
 
-1. Download the `.zip` for this release.
-2. Verify its SHA-256 against `SHASUMS256.txt` — see [verify.md](verify.md).
-3. **Unzip it** to a folder you'll keep. Chrome loads from this folder every
+1. Verify its SHA-256 against the checksum published with it — see
+   [verify.md](verify.md).
+2. **Unzip it** to a folder you'll keep. Chrome loads from this folder every
    time it starts, so don't delete it after installing.
 4. Open `chrome://extensions`.
 5. Enable **Developer mode** (top-right toggle).

@@ -564,13 +564,14 @@ async function main() {
       ], `could not refresh the existing draft ${publicTag}`);
       console.log(`draft reused   : ${publicTag} (left over from an earlier run, notes refreshed)`);
     } else {
+      // No latest flag here either — GitHub rejects make_latest on a draft,
+      // and `create --draft` makes one. It is set at promotion time, step 10.
       ghOrFail([
         'release', 'create', publicTag,
         '-R', PUBLIC_REPO,
         '--draft',
         '--title', title,
         '--notes-file', notesPath,
-        config.latest ? '--latest' : '--latest=false',
       ], `could not create draft release ${publicTag}`);
       console.log(`draft created  : ${publicTag}`);
     }
@@ -611,7 +612,13 @@ async function main() {
       const name = path.basename(file);
       const localSize = fs.statSync(file).size;
       const entry = present.get(name);
-      if (isComplete(entry, localSize)) {
+      // SHASUMS256.txt is the one file whose size cannot reveal a change: it is
+      // a fixed-width list of hashes, so re-cutting the source release produces
+      // a different file of identical length. Skipping it on a size match would
+      // promote checksums that describe the previous binaries — undetectably,
+      // and onto an immutable release. It is under a kilobyte; always re-send.
+      const alwaysResend = name === CHECKSUMS_FILE;
+      if (!alwaysResend && isComplete(entry, localSize)) {
         console.log(`  skip     ${name} (already on the draft, ${formatSize(localSize)})`);
         skipped += 1;
         continue;
@@ -646,7 +653,22 @@ async function main() {
     if (stray.length > 0) {
       fail(`draft ${publicTag} carries unexpected asset(s): ${stray.join(', ')} — remove them before publishing`);
     }
+    // Read the checksum file back off the draft and compare it byte for byte.
+    // Size and state agreeing is not the same as the right bytes being there,
+    // and this is the file every downloader trusts to judge the others.
+    const readbackDir = path.join(stagingDir, 'readback');
+    fs.rmSync(readbackDir, { recursive: true, force: true });
+    fs.mkdirSync(readbackDir, { recursive: true });
+    const pull = gh(['release', 'download', publicTag, '-R', PUBLIC_REPO, '-p', CHECKSUMS_FILE, '-D', readbackDir], { capture: true });
+    if (pull.status !== 0) {
+      fail(`could not read ${CHECKSUMS_FILE} back from the draft to verify it`);
+    }
+    const served = fs.readFileSync(path.join(readbackDir, CHECKSUMS_FILE));
+    if (!served.equals(fs.readFileSync(checksumsPath))) {
+      fail(`${CHECKSUMS_FILE} on the draft does not match the one just generated — refusing to publish checksums that describe different bytes`);
+    }
     console.log(`assets         : ${uploaded} uploaded, ${skipped} already present, ${wanted.length} verified on the draft`);
+    console.log(`checksum file  : read back from the draft and byte-identical`);
   }
 
   // ---- 8. Plan summary -----------------------------------------------------

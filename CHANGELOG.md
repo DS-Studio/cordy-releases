@@ -121,7 +121,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Updated the bundled privacy policy (English and Chinese) to more clearly distinguish local browsing data you have on your device from content you explicitly attach with @ mentions or that AI tools retrieve, including tab and bookmark titles, URLs, and visit times pulled into history-based context.
 - Removed outdated descriptions of AI bookmark tagging and categorization, and removed the incorrect claim that history and tab data never leave your device.
 - Clarified how API keys authenticate your requests to an AI provider, what data-use consent applies when using cloud AI, and the difference between on-device inference and AI running on a runtime endpoint you configure yourself.
-- This is the version currently published on the Chrome Web Store. The `.zip` attached to this release is the same reviewed package, provided so it can be audited — not as an alternate way to install.
+- This is the version currently published on the Chrome Web Store. Install it from there — no build of the extension is published in this repository.
 
 ### 2.5.3 — 2026-09-16
 

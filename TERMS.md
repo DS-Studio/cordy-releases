@@ -4,6 +4,16 @@ These terms govern the files published in this repository's releases. They
 supplement, and do not replace, the product terms published at
 https://cordy.dsdev.cn
 
+## Which terms apply to which build
+
+**Cordy Desktop 0.5.3 and earlier were released under the MIT License, and this
+page does not take that away.** If you obtained one of those builds, the MIT
+License governs what you may do with it, including the permissions this page
+otherwise withholds. See [LICENSE.md](LICENSE.md).
+
+Everything below applies to Cordy Desktop 0.5.4 and later, and to every other
+product published here.
+
 ## What you may do
 
 You may download, install, and use the published builds for their intended

@@ -30,7 +30,7 @@ Released 2026-09-17 · [Release notes](https://github.com/DS-Studio/cordy-releas
 | Linux | x64 | [cordy-Setup-0.5.3-linux-x64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-x64.deb) | 108.5 MB | `a7cc16e503c8` |
 | Linux | arm64 | [cordy-Setup-0.5.3-linux-arm64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-arm64.deb) | 103.6 MB | `310a9c7e2227` |
 
-> Windows x64 and macOS Apple Silicon only. Windows installers are not code-signed and macOS builds are not notarized, so your operating system will warn you on first run.
+> Windows x64, macOS Apple Silicon, and Linux x64/arm64. There is no Intel Mac build and no Windows-on-ARM build. Windows installers are not code-signed and macOS builds are not notarized, so those two warn you on first run — see the install guides. On macOS take the .dmg unless you specifically want the raw .app; on Linux take the .AppImage unless you prefer system package management.
 
 ### Cordy for Chrome
 
@@ -40,7 +40,7 @@ Install from the Chrome Web Store — it is the only supported way to install th
 
 _No public build yet._
 
-> Any .zip attached to a release is a verification artifact for auditing the reviewed package, not an alternate install path.
+> No build of the extension is published in this repository. Its changelog is maintained here; the Store is the only place to get it.
 
 ### CordyAI
 

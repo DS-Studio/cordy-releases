@@ -29,7 +29,7 @@ Cordy 系列产品的公开下载、更新日志与问题反馈入口。
 | Linux | x64 | [cordy-Setup-0.5.3-linux-x64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-x64.deb) | 108.5 MB | `a7cc16e503c8` |
 | Linux | arm64 | [cordy-Setup-0.5.3-linux-arm64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-arm64.deb) | 103.6 MB | `310a9c7e2227` |
 
-> 仅支持 Windows x64 与 macOS Apple Silicon。Windows 安装包未做代码签名，macOS 构建未经公证，首次运行时系统会弹出安全警告。
+> 支持 Windows x64、macOS Apple Silicon，以及 Linux x64/arm64。没有 Intel Mac 版本，也没有 Windows on ARM 版本。Windows 安装包未做代码签名，macOS 构建未经公证，这两个平台首次运行时系统会弹出警告——见安装文档。macOS 请选 .dmg（除非你确实需要裸 .app）；Linux 请选 .AppImage（除非你希望走系统包管理）。
 
 ### Cordy 浏览器扩展
 
@@ -39,7 +39,7 @@ Cordy 系列产品的公开下载、更新日志与问题反馈入口。
 
 _暂无公开构建。_
 
-> Release 中附带的 .zip 是用于核对已审核包内容的校验产物，不是另一条安装路径。
+> 本仓库没有发布扩展的构建包。这里维护它的更新日志，获取渠道只有应用商店。
 
 ### CordyAI
 
