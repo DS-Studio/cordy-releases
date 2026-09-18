@@ -13,6 +13,10 @@
 *.aab
 SHASUMS256.txt
 
+# The leak-scan term list. Never commit this: the whole point is that the terms
+# the scanner suppresses must not themselves ship in a public repository.
+.leakterms
+
 # Tooling noise
 node_modules/
 .DS_Store

@@ -1,0 +1,22 @@
+# Copy to `.leakterms` (gitignored) and fill in the real terms, one per line.
+# Blank lines and lines starting with # are ignored. Matching is case-insensitive.
+#
+# This file must never contain a real term. `.leakterms` itself must never be
+# committed, and must never be encoded-and-committed either: base64 is not
+# secrecy, and an earlier version of this repository leaked its whole list that
+# way. If a term is sensitive enough to scan for, it is sensitive enough to keep
+# out of a public repository entirely.
+#
+# What belongs here:
+#   - retired product or project names that should not resurface
+#   - internal process vocabulary, gate names, QA terminology
+#   - internal documentation paths
+#   - symbol names from private source
+#   - third-party internal labels that appeared in private release notes
+#
+# Where to keep the real list:
+#   - locally in .leakterms, and
+#   - in CI, as the LEAKSCAN_TERMS secret (newline- or comma-separated)
+#
+# Without either, `node scripts/leakscan.mjs` reports PARTIAL and
+# `scripts/publish.mjs` refuses to publish.

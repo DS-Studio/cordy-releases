@@ -36,7 +36,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import * as readline from 'node:readline/promises';
 import { fileURLToPath } from 'node:url';
-import { scanText, formatFindings } from './leakscan.mjs';
+import { scanText, formatFindings, denyTermsStatus } from './leakscan.mjs';
 import { renderReadmes } from './render.mjs';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -522,12 +522,19 @@ async function main() {
   // archives come from, so say it here, on every release, in both languages.
   body += `\n\n---\n\n${ARCHIVE_NOTE}`;
 
+  // A release must never be cut with a partial scan: the literal-term list is
+  // the half that catches internal vocabulary, and it lives outside this repo.
+  const terms = denyTermsStatus();
+  if (!terms.loaded) {
+    fail('the leak-scan term list is not available (.leakterms or LEAKSCAN_TERMS). '
+      + 'Publishing with only the pattern rules would skip every internal-vocabulary check.');
+  }
   const findings = scanText(body, 'release notes');
   if (findings.length > 0) {
     console.error(`\n${formatFindings(findings)}`);
     fail(`release notes contain ${findings.length} forbidden string(s); nothing was created`);
   }
-  console.log(`leak scan      : clean (${body.split('\n').length} line(s))`);
+  console.log(`leak scan      : clean (${body.split('\n').length} line(s), ${terms.count} terms from ${terms.source})`);
 
   // Written even on a dry run, so the exact body can be read before publishing.
   const notesPath = path.join(STAGING_ROOT, `${publicTag}-notes.md`);

@@ -23,6 +23,22 @@ Assets always come from the private release, never from a local build
 directory. If something is missing there, upload it there first — that is what
 makes the result reproducible instead of depending on one machine's disk.
 
+## The leak-scan term list
+
+`scripts/leakscan.mjs` checks two things: pattern rules that live in the file,
+and a list of forbidden literal terms that deliberately does **not**.
+
+Put the terms in `.leakterms` at the repo root (gitignored, see
+`.leakterms.example`), or in `LEAKSCAN_TERMS` for CI. Without them the scan
+reports `PARTIAL` and `publish.mjs` refuses to publish, because the half that
+catches internal vocabulary would be missing.
+
+Do not commit the list, and do not commit an encoded version of it either. An
+earlier version of this repository kept the terms base64-encoded in
+`leakscan.mjs` on the theory that encoding hid them. It does not — base64 is an
+encoding, not a secret — and the file's own comment gave the decode command. The
+whole list shipped publicly in a tool built to prevent exactly that.
+
 ## Publishing is irreversible, and so is the tag
 
 Immutable Releases is enabled on this repository. Once a draft is promoted:
