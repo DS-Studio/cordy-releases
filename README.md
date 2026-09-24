@@ -40,7 +40,7 @@ Install from the Chrome Web Store — it is the only supported way to install th
 
 _No public build yet._
 
-> No build of the extension is published in this repository. Its changelog is maintained here; the Store is the only place to get it.
+> The .zip is published so the package can be verified, not as an alternate way to install. Install from the Chrome Web Store.
 
 ### CordyAI
 

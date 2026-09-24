@@ -3,9 +3,9 @@
 Public release history for the Cordy family of products. Each product has its
 own section, newest version first.
 
-Only the most recent release of each product has downloadable builds attached —
-see [README.md](README.md). Versions listed here without a download are part of
-the product's history, published for reference.
+[README.md](README.md) lists the downloads of each product's most recent
+release. Versions listed here without a download are part of the product's
+history, published for reference.
 
 Dates are the release dates recorded by each product. 中文版本见
 [CHANGELOG.zh-CN.md](CHANGELOG.zh-CN.md)。
@@ -116,12 +116,23 @@ Dates are the release dates recorded by each product. 中文版本见
 
 ## Cordy for Chrome
 
+### 2.5.5 — 2026-09-24
+
+- Fixed importing and syncing bookmarks from your browser into Cordy, which failed in versions 2.5.2 through 2.5.4. Manual and automatic sync now run through one background process; if the bookmarks permission is missing, Cordy says so and lets you grant it and retry, and the list refreshes as soon as a sync finishes.
+- Fixed a blank side panel after restoring data: an open side panel now reloads itself once the restore completes.
+- Fixed the "Open AI Settings" button on the floating result card being blocked by Chrome (`ERR_BLOCKED_BY_CLIENT`) when a feature such as translation had no model configured. It now opens the AI settings page, or switches to it if it is already open.
+- The output language setting now applies to explanations, page and selection summaries, slash commands, and conversation summaries; a language you name in the request itself takes precedence. Chrome's built-in AI answers in the requested language (English, Japanese, Spanish, German, or French) and tells you plainly when a language, including Chinese, is not supported, instead of silently answering in English.
+- Added four AI providers: DeepSeek, Qwen (Alibaba Cloud Model Studio), Groq, and Mistral. A custom OpenAI-compatible service no longer becomes unusable when its model catalog check fails; the models you entered manually keep working.
+- Added a built-in Release notes page, reachable from the Dashboard sidebar (which also shows your current version) and from the side panel settings, with links to each version's public release from 2.5.4 on. After an update, Cordy shows an "Updated to" notice you can open or dismiss.
+- The Tabs and Collections toolbars in the side panel stay on a single row in every language, and chat history cards no longer show overlapping dates, titles, and buttons.
+- The `.zip` attached to this release is published so the package can be verified. Install Cordy from the Chrome Web Store, the only supported way to install it.
+
 ### 2.5.4 — 2026-09-16
 
 - Updated the bundled privacy policy (English and Chinese) to more clearly distinguish local browsing data you have on your device from content you explicitly attach with @ mentions or that AI tools retrieve, including tab and bookmark titles, URLs, and visit times pulled into history-based context.
 - Removed outdated descriptions of AI bookmark tagging and categorization, and removed the incorrect claim that history and tab data never leave your device.
 - Clarified how API keys authenticate your requests to an AI provider, what data-use consent applies when using cloud AI, and the difference between on-device inference and AI running on a runtime endpoint you configure yourself.
-- This is the version currently published on the Chrome Web Store. Install it from there — no build of the extension is published in this repository.
+- This is the version currently published on the Chrome Web Store. The `.zip` attached to its release is the same reviewed package, provided so it can be audited — not as an alternate way to install.
 
 ### 2.5.3 — 2026-09-16
 
