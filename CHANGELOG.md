@@ -123,7 +123,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Fixed the "Open AI Settings" button on the floating result card being blocked by Chrome (`ERR_BLOCKED_BY_CLIENT`) when a feature such as translation had no model configured. It now opens the AI settings page, or switches to it if it is already open.
 - The output language setting now applies to explanations, page and selection summaries, slash commands, and conversation summaries; a language you name in the request itself takes precedence. Chrome's built-in AI answers in the requested language (English, Japanese, Spanish, German, or French) and tells you plainly when a language, including Chinese, is not supported, instead of silently answering in English.
 - Added four AI providers: DeepSeek, Qwen (Alibaba Cloud Model Studio), Groq, and Mistral. A custom OpenAI-compatible service no longer becomes unusable when its model catalog check fails; the models you entered manually keep working.
-- Added a built-in Release notes page, reachable from the Dashboard sidebar (which also shows your current version) and from the side panel settings, with links to each version's public release from 2.5.4 on. After an update, Cordy shows an "Updated to" notice you can open or dismiss.
+- Added a built-in Release notes page, reachable from the Dashboard sidebar (which also shows your current version) and from the side panel settings, with a link to each version's public release, starting with this one. After an update, Cordy shows an "Updated to" notice you can open or dismiss.
 - The Tabs and Collections toolbars in the side panel stay on a single row in every language, and chat history cards no longer show overlapping dates, titles, and buttons.
 - The `.zip` attached to this release is published so the package can be verified. Install Cordy from the Chrome Web Store, the only supported way to install it.
 
@@ -132,7 +132,7 @@ Dates are the release dates recorded by each product. 中文版本见
 - Updated the bundled privacy policy (English and Chinese) to more clearly distinguish local browsing data you have on your device from content you explicitly attach with @ mentions or that AI tools retrieve, including tab and bookmark titles, URLs, and visit times pulled into history-based context.
 - Removed outdated descriptions of AI bookmark tagging and categorization, and removed the incorrect claim that history and tab data never leave your device.
 - Clarified how API keys authenticate your requests to an AI provider, what data-use consent applies when using cloud AI, and the difference between on-device inference and AI running on a runtime endpoint you configure yourself.
-- This is the version currently published on the Chrome Web Store. The `.zip` attached to its release is the same reviewed package, provided so it can be audited — not as an alternate way to install.
+- This is the version currently published on the Chrome Web Store. Install it from there.
 
 ### 2.5.3 — 2026-09-16
 
