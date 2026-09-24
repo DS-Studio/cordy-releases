@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-17T20:32:41.520Z",
+  "generated": "2026-09-24T02:48:13.558Z",
   "site": "https://cordy.dsdev.cn",
   "repo": "DS-Studio/cordy-releases",
   "products": [
@@ -70,10 +70,10 @@
       "id": "chrome",
       "name": "Cordy for Chrome",
       "nameZh": "Cordy 浏览器扩展",
-      "status": "unreleased",
-      "version": null,
-      "tag": null,
-      "releasedAt": null,
+      "status": "released",
+      "version": "2.5.5",
+      "tag": "chrome-v2.5.5",
+      "releasedAt": "2026-09-24T02:48:13.553Z",
       "channel": {
         "kind": "chrome-web-store",
         "url": "https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih",
@@ -82,7 +82,15 @@
       },
       "notes": "The .zip is published so the package can be verified, not as an alternate way to install. Install from the Chrome Web Store.",
       "notesZh": "此处的 .zip 用于核对安装包，不是另一条安装途径。请从 Chrome 应用商店安装。",
-      "assets": []
+      "assets": [
+        {
+          "file": "cordy-2.5.5-chrome.zip",
+          "os": "Chrome",
+          "arch": "—",
+          "size": 14094547,
+          "sha256": "c819e3a77cc16b4ff36d530f19d54077524499c65e1550c278f7586ca98d151b"
+        }
+      ]
     },
     {
       "id": "app",

@@ -32,13 +32,19 @@ Released 2026-09-17 · [Release notes](https://github.com/DS-Studio/cordy-releas
 
 > Windows x64, macOS Apple Silicon, and Linux x64/arm64. There is no Intel Mac build and no Windows-on-ARM build. Windows installers are not code-signed and macOS builds are not notarized, so those two warn you on first run — see the install guides. On macOS take the .dmg unless you specifically want the raw .app; on Linux take the .AppImage unless you prefer system package management.
 
-### Cordy for Chrome
+### Cordy for Chrome 2.5.5
 
 **[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih)**
 
 Install from the Chrome Web Store — it is the only supported way to install this extension, and it keeps itself updated.
 
-_No public build yet._
+Released 2026-09-24 · [Release notes](https://github.com/DS-Studio/cordy-releases/releases/tag/chrome-v2.5.5)
+
+The files below are verification artifacts for the published package:
+
+| Platform | Architecture | File | Size | SHA-256 |
+| --- | --- | --- | --- | --- |
+| Chrome | — | [cordy-2.5.5-chrome.zip](https://github.com/DS-Studio/cordy-releases/releases/download/chrome-v2.5.5/cordy-2.5.5-chrome.zip) | 13.4 MB | `c819e3a77cc1` |
 
 > The .zip is published so the package can be verified, not as an alternate way to install. Install from the Chrome Web Store.
 
