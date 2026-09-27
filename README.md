@@ -16,21 +16,15 @@ published builds can be downloaded, verified, and discussed in one place.
 
 <!-- BEGIN:DOWNLOADS -->
 
-### Cordy Desktop 0.5.3
+### Cordy Desktop 0.5.4
 
-Released 2026-09-17 · [Release notes](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3)
+Released 2026-09-27 · [Release notes](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.4)
 
 | Platform | Architecture | File | Size | SHA-256 |
 | --- | --- | --- | --- | --- |
-| Windows | x64 | [cordy-Setup-0.5.3.exe](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3.exe) | 112.3 MB | `785338759ac0` |
-| macOS | arm64 | [cordy-Setup-0.5.3.dmg](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3.dmg) | 130.7 MB | `4609064b04b0` |
-| macOS | arm64 | [cordy-Setup-0.5.3.zip](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3.zip) | 126.2 MB | `14c2feaf7d54` |
-| Linux | x64 | [cordy-Setup-0.5.3-linux-x64.AppImage](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-x64.AppImage) | 137.4 MB | `546b1ec39169` |
-| Linux | arm64 | [cordy-Setup-0.5.3-linux-arm64.AppImage](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-arm64.AppImage) | 138.4 MB | `44547751054c` |
-| Linux | x64 | [cordy-Setup-0.5.3-linux-x64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-x64.deb) | 108.5 MB | `a7cc16e503c8` |
-| Linux | arm64 | [cordy-Setup-0.5.3-linux-arm64.deb](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.3/cordy-Setup-0.5.3-linux-arm64.deb) | 103.6 MB | `310a9c7e2227` |
+| Windows | x64 | [cordy-desktop-0.5.4-win-x64.exe](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.4/cordy-desktop-0.5.4-win-x64.exe) | 112.4 MB | `529db2dd1f0a` |
 
-> Windows x64, macOS Apple Silicon, and Linux x64/arm64. There is no Intel Mac build and no Windows-on-ARM build. Windows installers are not code-signed and macOS builds are not notarized, so those two warn you on first run — see the install guides. On macOS take the .dmg unless you specifically want the raw .app; on Linux take the .AppImage unless you prefer system package management.
+> 0.5.4 is available for Windows x64 only. For macOS (Apple Silicon) and Linux (x64/arm64), use [Cordy Desktop 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3). There is no Windows-on-ARM build. The Windows installer is not code-signed, so Windows SmartScreen warns you on first run — see the install guide.
 
 ### Cordy for Chrome 2.5.5
 
