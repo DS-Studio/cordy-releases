@@ -130,6 +130,16 @@ const EXPECTED_ASSETS = {
           `cordy-Setup-${version}-linux-arm64.deb`,
         ];
       }
+      // 0.5.4 was published for Windows only, by maintainer decision on
+      // 2026-09-27: no macOS or Linux packages were built for it, and those
+      // platforms stay on 0.5.3. The exception names this one version exactly,
+      // so a later release with a missing platform still aborts the run.
+      if (version === '0.5.4') {
+        return [
+          `cordy-desktop-${version}-win-x64.exe`,
+          `cordy-desktop-${version}-win-x64.exe.blockmap`,
+        ];
+      }
       return [
         `cordy-desktop-${version}-win-x64.exe`,
         `cordy-desktop-${version}-win-x64.exe.blockmap`,

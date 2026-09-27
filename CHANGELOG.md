@@ -12,6 +12,21 @@ Dates are the release dates recorded by each product. 中文版本见
 
 ## Cordy Desktop
 
+### 0.5.4 — 2026-09-27
+
+- This release is for Windows (x64) only. There are no macOS or Linux packages for 0.5.4; on those platforms, keep using 0.5.3.
+- Cordy no longer creates or manages git worktrees: every workspace works in its project's own checkout. For a separate checkout, run `git worktree add` yourself and add that folder as its own project. Worktree workspaces from an earlier version are converted on first launch: they switch to the project's own checkout, the worktree folder on disk is left untouched, and the previous data file is kept as a backup next to the new one.
+- Images, SVG, video and audio files open in a preview tab instead of the text editor.
+- The Changes panel gets a keyboard-driven branch picker and Publish Branch for a branch with no upstream, and asks before a Pull or a checkout that would affect unsaved drafts or running agents.
+- Git Fetch, Pull and Push now say what happened, including why they failed. Stage, unstage and discard now touch only the file you clicked; a file name containing characters such as `[` could previously affect other files too.
+- The file tree supports multi-select, drag to move, cut / copy / paste, pasting files copied in File Explorer, and moves deleted files to the Recycle Bin. It now shows everything except `.git`, and says so when a very large folder is only partly listed.
+- Terminal tabs can be dragged to reorder them, merged into another tab's split, or split back out; there are next / previous tab commands; text copied by terminal programs such as Claude Code or Codex reaches the system clipboard; and restarting an exited shell keeps what it printed.
+- The performance monitor opens from the command palette, and the diagnostics export now lists recent process crashes.
+- Privacy and security: a crashed browser tab's page title no longer ends up in diagnostics exports; coding agents only start inside a project folder; page scripts can no longer copy arbitrary files into a workspace; and repository files can no longer replace the app window.
+- Many fixes to editing, notes, shortcuts and workspace switching. Electron is updated to 42.11.8.
+- Cordy Desktop is proprietary software from 0.5.4 on. Versions 0.5.3 and earlier remain under the MIT license.
+- The Windows installer is still not code-signed, so Windows SmartScreen shows an "unrecognised app" warning on first run.
+
 ### 0.5.3 — 2026-09-17
 
 - Added native macOS (Apple Silicon) and Linux (x86_64 and arm64) packages, in the same install channels Windows already has: `.dmg`/`.zip` on macOS and `.AppImage`/`.deb` on Linux, installable side by side with independent data.
