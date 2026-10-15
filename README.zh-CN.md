@@ -15,15 +15,15 @@ Cordy 系列产品的公开下载、更新日志与问题反馈入口。
 
 <!-- BEGIN:DOWNLOADS -->
 
-### Cordy 桌面端 0.5.4
+### Cordy 桌面端 0.5.5
 
-发布于 2026-09-27 · [发布说明](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.4)
+发布于 2026-10-15 · [发布说明](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.5)
 
 | 平台 | 架构 | 文件 | 大小 | SHA-256 |
 | --- | --- | --- | --- | --- |
-| Windows | x64 | [cordy-desktop-0.5.4-win-x64.exe](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.4/cordy-desktop-0.5.4-win-x64.exe) | 112.4 MB | `529db2dd1f0a` |
+| Windows | x64 | [cordy-desktop-0.5.5-win-x64.exe](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.5/cordy-desktop-0.5.5-win-x64.exe) | 113.7 MB | `5e1612645b6f` |
 
-> 0.5.4 仅提供 Windows x64 版本。macOS（Apple Silicon）与 Linux（x64/arm64）请使用 [Cordy 桌面端 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3)。没有 Windows on ARM 版本。Windows 安装包未做代码签名，首次运行时 Windows SmartScreen 会弹出警告——见安装文档。
+> 0.5.5 仅提供 Windows x64 版本。macOS（Apple Silicon）与 Linux（x64/arm64）请使用 [Cordy 桌面端 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3)。没有 Windows on ARM 版本。Windows 安装包未做代码签名，首次运行时 Windows SmartScreen 会弹出警告——见安装文档。
 
 ### Cordy 浏览器扩展 2.5.5
 

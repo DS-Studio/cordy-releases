@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-27T05:47:07.349Z",
+  "generated": "2026-10-15T03:05:17.559Z",
   "site": "https://cordy.dsdev.cn",
   "repo": "DS-Studio/cordy-releases",
   "products": [
@@ -8,19 +8,19 @@
       "name": "Cordy Desktop",
       "nameZh": "Cordy 桌面端",
       "status": "released",
-      "version": "0.5.4",
-      "tag": "desktop-v0.5.4",
-      "releasedAt": "2026-09-27T05:47:07.349Z",
+      "version": "0.5.5",
+      "tag": "desktop-v0.5.5",
+      "releasedAt": "2026-10-15T03:05:17.558Z",
       "channel": null,
-      "notes": "0.5.4 is available for Windows x64 only. For macOS (Apple Silicon) and Linux (x64/arm64), use [Cordy Desktop 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3). There is no Windows-on-ARM build. The Windows installer is not code-signed, so Windows SmartScreen warns you on first run — see the install guide.",
-      "notesZh": "0.5.4 仅提供 Windows x64 版本。macOS（Apple Silicon）与 Linux（x64/arm64）请使用 [Cordy 桌面端 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3)。没有 Windows on ARM 版本。Windows 安装包未做代码签名，首次运行时 Windows SmartScreen 会弹出警告——见安装文档。",
+      "notes": "0.5.5 is available for Windows x64 only. For macOS (Apple Silicon) and Linux (x64/arm64), use [Cordy Desktop 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3). There is no Windows-on-ARM build. The Windows installer is not code-signed, so Windows SmartScreen warns you on first run — see the install guide.",
+      "notesZh": "0.5.5 仅提供 Windows x64 版本。macOS（Apple Silicon）与 Linux（x64/arm64）请使用 [Cordy 桌面端 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3)。没有 Windows on ARM 版本。Windows 安装包未做代码签名，首次运行时 Windows SmartScreen 会弹出警告——见安装文档。",
       "assets": [
         {
-          "file": "cordy-desktop-0.5.4-win-x64.exe",
+          "file": "cordy-desktop-0.5.5-win-x64.exe",
           "os": "Windows",
           "arch": "x64",
-          "size": 117811228,
-          "sha256": "529db2dd1f0acb42951469e567c6ad7cc530c21c14d1845350984da275b82a8a"
+          "size": 119181123,
+          "sha256": "5e1612645b6fb2f5b80995f53ca250ece27248230e91506ef06049b3832a44cd"
         }
       ]
     },

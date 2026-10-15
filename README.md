@@ -16,15 +16,15 @@ published builds can be downloaded, verified, and discussed in one place.
 
 <!-- BEGIN:DOWNLOADS -->
 
-### Cordy Desktop 0.5.4
+### Cordy Desktop 0.5.5
 
-Released 2026-09-27 · [Release notes](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.4)
+Released 2026-10-15 · [Release notes](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.5)
 
 | Platform | Architecture | File | Size | SHA-256 |
 | --- | --- | --- | --- | --- |
-| Windows | x64 | [cordy-desktop-0.5.4-win-x64.exe](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.4/cordy-desktop-0.5.4-win-x64.exe) | 112.4 MB | `529db2dd1f0a` |
+| Windows | x64 | [cordy-desktop-0.5.5-win-x64.exe](https://github.com/DS-Studio/cordy-releases/releases/download/desktop-v0.5.5/cordy-desktop-0.5.5-win-x64.exe) | 113.7 MB | `5e1612645b6f` |
 
-> 0.5.4 is available for Windows x64 only. For macOS (Apple Silicon) and Linux (x64/arm64), use [Cordy Desktop 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3). There is no Windows-on-ARM build. The Windows installer is not code-signed, so Windows SmartScreen warns you on first run — see the install guide.
+> 0.5.5 is available for Windows x64 only. For macOS (Apple Silicon) and Linux (x64/arm64), use [Cordy Desktop 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3). There is no Windows-on-ARM build. The Windows installer is not code-signed, so Windows SmartScreen warns you on first run — see the install guide.
 
 ### Cordy for Chrome 2.5.5
 
