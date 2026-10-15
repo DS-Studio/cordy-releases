@@ -142,6 +142,18 @@ Dates are the release dates recorded by each product. 中文版本见
 
 ## Cordy for Chrome
 
+### 2.5.6 — 2026-10-15
+
+- Added a Permissions tab in Settings that lists every optional permission Cordy can ask for: website access, local AI runtimes (localhost), bookmarks, browsing history, and clearing browsing data. Each one shows its current status with a button to grant or revoke it. The Text Selection Menu setting now offers a "Grant website access" button right where it says access is needed.
+- The selection menu on web pages uses icon buttons with a label on hover, and tooltips inside web pages now actually appear, including on the floating result card.
+- Fixed the first result card not appearing when you right-click translate, explain, or summarize on a page where Cordy had not loaded yet.
+- The floating result card streams more smoothly and uses much less CPU while an answer streams and while you drag it.
+- Translating with a cloud or local AI model now sends one request per paragraph instead of one per line, streams the translation in, and keeps the original line breaks. The source and translation panes each have their own copy button.
+- In the side panel's Collections, the Select toggle sits on the count row with a compact icon bar below it, ticking checkboxes no longer lags, and the copy-links menu and drag handle have tooltips.
+- In right-to-left languages such as Arabic, the Dashboard sidebar now sits on the right and no longer covers the page.
+- Updated the AI SDK, the provider integrations, React, and other underlying libraries.
+- The `.zip` attached to this release is published so the package can be verified. Install Cordy from the Chrome Web Store, the only supported way to install it.
+
 ### 2.5.5 — 2026-09-24
 
 - Fixed importing and syncing bookmarks from your browser into Cordy, which failed in versions 2.5.2 through 2.5.4. Manual and automatic sync now run through one background process; if the bookmarks permission is missing, Cordy says so and lets you grant it and retry, and the list refreshes as soon as a sync finishes.
