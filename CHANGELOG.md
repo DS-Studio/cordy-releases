@@ -12,6 +12,17 @@ Dates are the release dates recorded by each product. 中文版本见
 
 ## Cordy Desktop
 
+### 0.5.5 — 2026-10-15
+
+- This release is for Windows (x64) only. There are no macOS or Linux packages for 0.5.5; on those platforms, keep using 0.5.3.
+- Notes are now a block editor: type `/` to insert headings, lists and task lists, callouts, code blocks, toggles, tables, columns, tabs, equations, a table of contents, and image, video, audio and file attachments; drag any block by its handle; paste Markdown and it becomes blocks. Existing notes are converted on first launch, and each original is kept as a backup. Going back to 0.5.4 after the conversion is not supported.
+- A note can be exported as a `.zip` in Notion's Markdown layout, and a Notion export or a Markdown file can be imported into a note. Each note has its own font, small text, full width and table-of-contents options, and a floating outline of its headings.
+- Panes in a tab can be arranged from a grip: preset layouts, docking along an edge, moving and swapping.
+- The Changes panel shows image diffs, gives merge conflicts their own group with "Mark resolved", and adds Stage all / Unstage all / Discard all actions; diffs wrap long lines by default, and a half-written commit message survives switching panels.
+- The file tree follows the active editor, can be filtered by name, shows symlinks, dims git-ignored entries and joins single-child folder chains into one row. It and the Changes panel keep up while coding agents write many files.
+- Fixes: no blank rows after dragging a terminal tab into a split; Open in → Terminal works on Windows; a new commit always appears in the Graph; saving a file no longer fails now and then while Git counts changed lines; a fault in one note or pane no longer blanks the whole window; switches read correctly in dark themes.
+- The Windows installer is still not code-signed, so Windows SmartScreen shows an "unrecognised app" warning on first run.
+
 ### 0.5.4 — 2026-09-27
 
 - This release is for Windows (x64) only. There are no macOS or Linux packages for 0.5.4; on those platforms, keep using 0.5.3.
