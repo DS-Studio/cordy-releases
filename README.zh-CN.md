@@ -25,19 +25,19 @@ Cordy 系列产品的公开下载、更新日志与问题反馈入口。
 
 > 0.5.5 仅提供 Windows x64 版本。macOS（Apple Silicon）与 Linux（x64/arm64）请使用 [Cordy 桌面端 0.5.3](https://github.com/DS-Studio/cordy-releases/releases/tag/desktop-v0.5.3)。没有 Windows on ARM 版本。Windows 安装包未做代码签名，首次运行时 Windows SmartScreen 会弹出警告——见安装文档。
 
-### Cordy 浏览器扩展 2.5.5
+### Cordy 浏览器扩展 2.5.6
 
 **[从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/cordy/kdpfbabcgdgcddadcdacejaaepgkajih)**
 
 请从 Chrome 应用商店安装——这是本扩展唯一受支持的安装方式，且会自动保持更新。
 
-发布于 2026-09-24 · [发布说明](https://github.com/DS-Studio/cordy-releases/releases/tag/chrome-v2.5.5)
+发布于 2026-10-15 · [发布说明](https://github.com/DS-Studio/cordy-releases/releases/tag/chrome-v2.5.6)
 
 以下文件是已发布包的校验产物：
 
 | 平台 | 架构 | 文件 | 大小 | SHA-256 |
 | --- | --- | --- | --- | --- |
-| Chrome | — | [cordy-2.5.5-chrome.zip](https://github.com/DS-Studio/cordy-releases/releases/download/chrome-v2.5.5/cordy-2.5.5-chrome.zip) | 13.4 MB | `c819e3a77cc1` |
+| Chrome | — | [cordy-2.5.6-chrome.zip](https://github.com/DS-Studio/cordy-releases/releases/download/chrome-v2.5.6/cordy-2.5.6-chrome.zip) | 14.2 MB | `8c7aabc39fe7` |
 
 > 此处的 .zip 用于核对安装包，不是另一条安装途径。请从 Chrome 应用商店安装。
 
