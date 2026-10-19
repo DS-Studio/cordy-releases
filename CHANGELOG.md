@@ -142,6 +142,17 @@ Dates are the release dates recorded by each product. 中文版本见
 
 ## Cordy for Chrome
 
+### 2.5.7 — 2026-10-19
+
+- You can import your OneTab data: in Collections, choose the HTML file OneTab exports, or paste the text it exports. Each OneTab group becomes a collection and keeps its original date.
+- Added "Save all open windows here" to Collections in the side panel and the Dashboard: each open window is saved as its own collection (incognito windows are skipped).
+- Opening Collections when the browser starts is now optional and off by default, so it no longer gets in the way of another New Tab extension. Turn it on in Settings → General → Startup.
+- In the collections, Read Later, history, tabs and bookmarks lists, a row's buttons now appear over the row when you hover it, so titles and addresses are no longer cut short.
+- Translating with a cloud AI model now sends the whole text in one request when it fits the model, keeps blank lines, and asks before splitting a very long text. The translation appears smoothly, and reloading or closing the page stops it right away. Gemini Nano translation in the translation workbench now works.
+- Cordy now gets each AI model's context size and output limit from public model catalogs, so newer models show correct limits. The privacy policy describes these downloads; they include no keys or personal data.
+- Fixed Full Sync of Chrome bookmarks failing when a folder holds about 100 or more bookmarks.
+- The `.zip` attached to this release is published so the package can be verified. Install Cordy from the Chrome Web Store, the only supported way to install it.
+
 ### 2.5.6 — 2026-10-15
 
 - Added a Permissions tab in Settings that lists every optional permission Cordy can ask for: website access, local AI runtimes (localhost), bookmarks, browsing history, and clearing browsing data. Each one shows its current status with a button to grant or revoke it. The Text Selection Menu setting now offers a "Grant website access" button right where it says access is needed.
