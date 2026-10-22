@@ -12,6 +12,16 @@ Dates are the release dates recorded by each product. 中文版本见
 
 ## Cordy Desktop
 
+### 0.6.0 — 2026-10-22
+
+- This release is for Windows (x64) only. There are no macOS or Linux packages for 0.6.0; on those platforms, keep using 0.5.3.
+- Notes draw Mermaid diagrams: a code block in the Mermaid language shows its diagram, and each diagram block switches between Code, Preview and Split.
+- Terminal programs that report their status through the Program Status Protocol (OSC 7501), such as Claude Code 2.1.295 or later, show on their tab whether they are working, need your approval, have a question, finished or failed, in any terminal tab. Their notifications follow that status and carry the workspace name.
+- Cordy no longer adds hook settings to Claude Code. Older Claude Code versions still run: started from the Claude Code agent preset, they get the status Cordy reads from the screen, as other agents do; started by hand in a plain tab, they show no status.
+- Cordy now runs on Electron 45 (Chromium 156). Saved browser passwords keep working without conversion.
+- Fixes: pasting over a selection that starts in an empty paragraph now inserts the pasted content instead of only removing the selection.
+- The Windows installer is still not code-signed, so Windows SmartScreen shows an "unrecognised app" warning on first run.
+
 ### 0.5.5 — 2026-10-15
 
 - This release is for Windows (x64) only. There are no macOS or Linux packages for 0.5.5; on those platforms, keep using 0.5.3.

@@ -8,6 +8,16 @@ Cordy 系列产品的公开发布历史。每个产品一个章节，新版本�
 
 ## Cordy 桌面端
 
+### 0.6.0 — 2026-10-22
+
+- 本版本仅提供 Windows（x64）安装包。0.6.0 没有 macOS 与 Linux 安装包，这两个平台请继续使用 0.5.3。
+- 笔记可以画 Mermaid 图表：语言为 Mermaid 的代码块会显示图表，每个图表块都能在 Code、Preview 与 Split 之间切换。
+- 通过 Program Status Protocol（OSC 7501）报告状态的终端程序（例如 Claude Code 2.1.295 及以上），会在自己的标签页上显示正在工作、需要你批准、有问题要问、已完成或已失败，任何终端标签页都适用。它们的通知跟随这些状态，并带上 workspace 名称。
+- Cordy 不再给 Claude Code 添加 hook 设置。较旧版本的 Claude Code 仍能运行：从 Claude Code agent 预设启动时，Cordy 像对其他 agent 一样从屏幕判断它的状态；在普通标签页里手动启动时，不显示状态。
+- Cordy 现在运行在 Electron 45（Chromium 156）上。已保存的浏览器密码无需转换，照常可用。
+- 修复：在从空段落开始的选区上粘贴，现在会插入粘贴的内容，而不是只删掉选中的内容。
+- Windows 安装包仍未进行代码签名，首次运行时 Windows SmartScreen 会显示"未识别应用"提示。
+
 ### 0.5.5 — 2026-10-15
 
 - 本版本仅提供 Windows（x64）安装包。0.5.5 没有 macOS 与 Linux 安装包，这两个平台请继续使用 0.5.3。
