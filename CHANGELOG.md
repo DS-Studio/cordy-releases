@@ -162,6 +162,16 @@ Dates are the release dates recorded by each product. 中文版本见
 
 ## Cordy for Chrome
 
+### 2.6.0 — 2026-10-28
+
+- New: Notes. The side panel has a Notes tab, and a button there opens the same note as its own page in a new tab. Both show the same note, and an edit in one shows up in the other within about a second.
+- The note editor works in blocks: type `/` at the start of a line or after a space to add headings, bulleted, numbered and task lists, quotes, callouts, toggles, columns, tables, code with syntax highlighting, Mermaid diagrams, equations, bookmarks, and images, videos, audio and files. Drag a block to move it.
+- Copy and paste Markdown, and import or export a Notion-style Markdown zip from the note's menu.
+- Your note and its attachments are stored only on your device and are never sent anywhere. Delete All under Settings → Data Management now deletes the note too; data backups don't include it, so export the note first if you want to keep it.
+- Long lists and tables in the in-page result card (for example a summary or an explanation) now appear more smoothly while they are written.
+- Scrollable lists such as the command palette, Dashboard search and the @ mention picker now show when there is more below, and the arrow keys keep the highlighted item in view.
+- The `.zip` attached to this release is published so the package can be verified. Install Cordy from the Chrome Web Store, the only supported way to install it.
+
 ### 2.5.7 — 2026-10-19
 
 - You can import your OneTab data: in Collections, choose the HTML file OneTab exports, or paste the text it exports. Each OneTab group becomes a collection and keeps its original date.
