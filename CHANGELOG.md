@@ -12,6 +12,16 @@ Dates are the release dates recorded by each product. 中文版本见
 
 ## Cordy Desktop
 
+### 0.6.1 — 2026-10-27
+
+- This release is for Windows (x64) only. There are no macOS or Linux packages for 0.6.1; on those platforms, keep using 0.5.3.
+- The interface is available in nine languages: English, Simplified and Traditional Chinese, Japanese, Korean, French, German, Spanish and Brazilian Portuguese. Cordy follows the system language by default; choose another under Settings > General > Language.
+- In notes, list items can hold images, files, code blocks and most other blocks, as in Notion; images and videos can be resized by dragging either side; "Copy image" and "Copy file" put a media block on the clipboard.
+- The command palette shows when there are more results: the next row peeks out at the bottom, the edges fade, and the arrow keys scroll one row early.
+- Runtime status moved from the pill in the bottom-right corner into the performance chip at the top left; its panel has a Runtime section with Restart runtime.
+- Fixes: buttons at the top left of the window no longer act as part of the title bar; files that differ only in line endings no longer show as changed in the Changes tab count and the Files tree once the Changes panel has checked them; typing `3. ` starts a numbered list at 3; dragging a media block shows a preview and works from its handle again; an empty note no longer shows its hint inside a new list item.
+- The Windows installer is still not code-signed, so Windows SmartScreen shows an "unrecognised app" warning on first run.
+
 ### 0.6.0 — 2026-10-22
 
 - This release is for Windows (x64) only. There are no macOS or Linux packages for 0.6.0; on those platforms, keep using 0.5.3.

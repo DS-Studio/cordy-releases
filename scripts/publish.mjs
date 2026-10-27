@@ -130,12 +130,17 @@ const EXPECTED_ASSETS = {
           `cordy-Setup-${version}-linux-arm64.deb`,
         ];
       }
-      // 0.5.4 (2026-09-27), 0.5.5 (2026-10-15) and 0.6.0 (2026-10-22) were
-      // published for Windows only, by maintainer decision: no macOS or Linux
-      // packages were built for them, and those platforms stay on 0.5.3. The
-      // exception names these versions exactly, so a later release with a
-      // missing platform still aborts the run.
-      if (version === '0.5.4' || version === '0.5.5' || version === '0.6.0') {
+      // 0.5.4 (2026-09-27), 0.5.5 (2026-10-15), 0.6.0 (2026-10-22) and 0.6.1
+      // (2026-10-27) were published for Windows only, by maintainer decision:
+      // no macOS or Linux packages were built for them, and those platforms
+      // stay on 0.5.3. The exception names these versions exactly, so a later
+      // release with a missing platform still aborts the run.
+      if (
+        version === '0.5.4' ||
+        version === '0.5.5' ||
+        version === '0.6.0' ||
+        version === '0.6.1'
+      ) {
         return [
           `cordy-desktop-${version}-win-x64.exe`,
           `cordy-desktop-${version}-win-x64.exe.blockmap`,
